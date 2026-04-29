@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-deep: #050810;
+  --bg-primary: #0a0e1a;
+  --bg-surface: #0f1629;
+  --bg-elevated: #151e35;
+  --border-subtle: #1e2d4a;
+  --border-glow: #2a4080;
+  --accent-cyan: #00d4ff;
+  --accent-blue: #4d9fff;
+  --accent-purple: #8b5cf6;
+  --accent-green: #00ff88;
+  --accent-orange: #ff6b35;
+  --accent-pink: #ff3d9a;
+  --text-primary: #e8f4fd;
+  --text-secondary: #7a9cc4;
+  --text-muted: #3d5a7a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Syne', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+#root { width: 100%; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--border-glow); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+* { scrollbar-width: thin; scrollbar-color: var(--border-glow) var(--bg-deep); }
+
+/* Selection */
+::selection { background: #00d4ff22; color: var(--accent-cyan); }
+
+/* Glow utilities */
+.glow-cyan { box-shadow: 0 0 20px #00d4ff22, 0 0 40px #00d4ff11; }
+.glow-purple { box-shadow: 0 0 20px #8b5cf622, 0 0 40px #8b5cf611; }
+.glow-green { box-shadow: 0 0 20px #00ff8822, 0 0 40px #00ff8811; }
+.text-glow { text-shadow: 0 0 20px #00d4ff66; }
+.text-glow-purple { text-shadow: 0 0 20px #8b5cf666; }
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes particle-float {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-120px) translateX(20px); opacity: 0; }
+}
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes scan-line {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed { animation: float-delayed 8s ease-in-out infinite 2s; }
+.animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, #00d4ff22, transparent);
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.2s ease;
+}
+.card-hover:hover {
+  border-color: var(--accent-cyan) !important;
+  box-shadow: 0 0 20px #00d4ff11, 0 4px 20px #00000040;
+  transform: translateY(-2px);
+}
+
+/* Button base */
+.btn-primary {
+  background: var(--accent-cyan);
+  color: var(--bg-deep);
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-family: 'Syne', sans-serif;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: #33ddff;
+  box-shadow: 0 0 20px #00d4ff44;
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent-cyan);
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-family: 'Syne', sans-serif;
+  transition: all 0.2s ease;
+  border: 1.5px solid var(--accent-cyan);
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background: #00d4ff11;
+  box-shadow: 0 0 15px #00d4ff22;
+}
+.btn-outline:active { transform: scale(0.97); }
+
+/* Code block syntax */
+.sql-keyword { color: #ff7b72; font-weight: 600; }
+.sql-function { color: #d2a8ff; }
+.sql-string { color: #a5d6ff; }
+.sql-number { color: #79c0ff; }
+.sql-comment { color: var(--text-muted); font-style: italic; }
+.sql-table { color: #ffa657; }
