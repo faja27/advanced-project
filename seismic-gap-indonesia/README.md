@@ -86,7 +86,7 @@ The five zones identified are: Sumatera, Jawa–Bali–NTB, Sulawesi–NTT, Malu
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR-GITHUB-USERNAME/seismic-gap-indonesia.git
+git clone https://github.com/faja27/seismic-gap-indonesia.git
 cd seismic-gap-indonesia
 ```
 
