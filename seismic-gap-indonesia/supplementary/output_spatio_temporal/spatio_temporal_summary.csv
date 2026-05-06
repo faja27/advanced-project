@@ -1,0 +1,6 @@
+zone_name,n_event,b_value,a_value,r2,recurrence_interval_days,mean_mag,max_mag,energy_total,gap_area_deg2,hazard_score,hazard_category
+Zona Sumatera,16090,0.8654,5.8758,-2.1039,10.3,4.5018,5.74,1.5267344174449806e+16,33,0.5824,Tinggi
+Zona Jawa-Bali-NTB,27818,0.9274,6.3613,-2.8238,6.9,4.4683,5.4,1.6302152484553976e+16,8,0.292,Rendah
+Zona Sulawesi-NTT,4664,0.7544,4.8941,-0.713,27.6,4.5757,7.9,1.2505573396413576e+17,14,0.2229,Rendah
+Zona Maluku,12468,0.3147,3.5623,-0.4928,3.7,5.3799,8.2,1.7471817963226888e+18,32,0.988,Sangat Tinggi
+Zona Papua,33862,1.118,7.2095,-0.4379,8.8,4.3884,5.1,1.2770046164414742e+16,21,0.3527,Rendah

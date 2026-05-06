@@ -1,0 +1,6 @@
+Zona,RMSE,MAE,MAPE,R2,Pearson,HitRate_pct,Model_Assessment,Tectonic_Implication
+Sumatera,17.6011,16.1626,150.79,-1.5161,0.7365,14.63,Poor,"High seismicity rate, aftershock-dominated"
+Jawa-Bali-NTB,27.902,19.9806,93.45,0.2126,0.5316,43.9,Acceptable,"Moderate predictability, regular recurrence"
+Sulawesi-NTT,14.2191,9.6467,57.13,0.0768,0.5275,21.95,Acceptable,"Deep slab dynamics, low event rate"
+Maluku,11.3405,8.6611,61.44,-0.0761,0.0073,26.83,Poor,"Episodic, multi-fault interaction"
+Papua,47.4969,31.6851,29.13,-0.0297,-0.1727,39.02,Poor,"Complex collision zone, stochastic"
