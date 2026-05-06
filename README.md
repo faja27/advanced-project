@@ -45,4 +45,4 @@ An interactive platform designed for mastering MySQL, focusing on efficient data
 
 * **GitHub:** [faja27](https://github.com/faja27)
 * **Email:** fmochammad1@gmail.com
-* **LinkedIn:** *(add your LinkedIn URL here)*
+* **LinkedIn:** *https://www.linkedin.com/in/mochammad-farhan-6914b712a/*
