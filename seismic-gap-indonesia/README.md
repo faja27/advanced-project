@@ -192,10 +192,10 @@ All analyses were originally run on Windows 10, Intel Core i7, 16 GB RAM, withou
 If you use this code or data in your research, please cite:
 
 ```bibtex
-@article{[AuthorLastName]2026seismicgap,
+@article{Farhan2026seismicgap,
   title   = {Spatiotemporal Clustering and LSTM-Based Seismic Gap Analysis
              along the Indonesian Subduction Zone (1950--2026)},
-  author  = {[Author Names]},
+  author  = {Farhan, Mochammad and Tukiyat and Basir, Choirul},
   journal = {Computers \& Geosciences},
   year    = {2026},
   doi     = {[DOI upon acceptance]}
