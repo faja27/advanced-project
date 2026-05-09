@@ -21,7 +21,7 @@ A full reproducible pipeline for spatiotemporal seismic gap analysis along the I
 
 ---
 
-### 2. 🗄️ MySQLMaster *(Interactive Learning Platform)*
+### 2. 🗄️ MySQLMaster *(Interactive Learning Platform) (In Progress) *
 
 An interactive platform designed for mastering MySQL, focusing on efficient database management and advanced query optimization.
 
