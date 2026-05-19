@@ -1,162 +1,246 @@
-# MySQL Learn — Platform Belajar MySQL Interaktif
+<div align="center">
 
-Aplikasi web interaktif untuk belajar MySQL dari level pemula hingga expert, lengkap dengan materi terstruktur, ujian per modul, dan SQL playground berbasis browser.
+<img src="https://img.shields.io/badge/version-1.0.0-00e5ff?style=flat-square" />
+<img src="https://img.shields.io/badge/status-production--ready-00e5ff?style=flat-square" />
+<img src="https://img.shields.io/badge/license-free-blueviolet?style=flat-square" />
+<img src="https://img.shields.io/badge/modules-38-ff6b6b?style=flat-square" />
 
----
+<br /><br />
 
-## Deskripsi
+```
+███╗   ███╗██╗   ██╗███████╗ ██████╗ ██╗     ███╗   ███╗ █████╗ ███████╗████████╗███████╗██████╗
+████╗ ████║╚██╗ ██╔╝██╔════╝██╔═══██╗██║     ████╗ ████║██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔══██╗
+██╔████╔██║ ╚████╔╝ ███████╗██║   ██║██║     ██╔████╔██║███████║███████╗   ██║   █████╗  ██████╔╝
+██║╚██╔╝██║  ╚██╔╝  ╚════██║██║▄▄ ██║██║     ██║╚██╔╝██║██╔══██║╚════██║   ██║   ██╔══╝  ██╔══██╗
+██║ ╚═╝ ██║   ██║   ███████║╚██████╔╝███████╗██║ ╚═╝ ██║██║  ██║███████║   ██║   ███████╗██║  ██║
+╚═╝     ╚═╝   ╚═╝   ╚══════╝ ╚══▀▀═╝ ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+```
 
-MySQL Learn adalah platform pembelajaran MySQL yang dirancang untuk pemula hingga developer yang ingin memperdalam SQL. Terdiri dari **38 modul** yang dikelompokkan dalam 4 level, setiap modul memiliki konten materi, contoh kode, dan ujian yang harus lulus untuk membuka modul berikutnya.
+### Platform Belajar MySQL Interaktif — dari Nol hingga Expert
 
-Seluruh SQL dieksekusi langsung di browser menggunakan **sql.js** (WebAssembly) — tidak perlu server database.
+**[🚀 Live Demo](#)** &nbsp;·&nbsp; **[📖 Dokumentasi](#)** &nbsp;·&nbsp; **[🐛 Laporkan Bug](../../issues)** &nbsp;·&nbsp; **[💡 Request Fitur](../../issues)**
 
----
+<br />
 
-## Fitur Utama
+![Hero Screenshot](https://placehold.co/900x450/0d1117/00e5ff?text=MySQLMaster+Screenshot)
 
-- **38 Modul** terbagi dalam 4 level (Fondasi → Menengah → Lanjutan → Expert)
-- **SQL Playground** — jalankan query SQL langsung di browser tanpa instalasi apapun
-- **Sistem Ujian** — 10 soal pilihan ganda, fill-in-the-blank, dan write-query per modul dengan timer 15 menit
-- **Progress Tracking** — lacak topik yang sudah dibaca, skor ujian, streak harian, dan total waktu belajar
-- **Achievement System** — raih badge untuk pencapaian tertentu (streak, nilai sempurna, selesaikan level)
-- **Export & Import Progress** — backup progress ke file JSON dan restore kapan saja
-- **SQL Sandbox Protection** — perintah berbahaya (DROP TABLE, DELETE tanpa WHERE, dll) diblokir dengan pesan error informatif
-
----
-
-## Tech Stack
-
-| Teknologi | Kegunaan |
-|-----------|----------|
-| React 19 + TypeScript | Framework UI utama |
-| Vite 8 | Build tool dan dev server |
-| Zustand | State management + persistence ke localStorage |
-| sql.js (WebAssembly) | Engine SQL di browser |
-| Monaco Editor | Code editor SQL dengan syntax highlighting |
-| Framer Motion | Animasi UI |
-| Recharts | Grafik aktivitas belajar |
-| Tailwind CSS | Styling utility-first |
-| React Router v7 | Client-side routing |
+</div>
 
 ---
 
-## Struktur Modul
+## ✦ Tentang Proyek
 
-| Level | Modul | Topik |
-|-------|-------|-------|
-| Level 1 — Fondasi | 1–6 | Pengenalan MySQL, Tipe Data, DDL, DML, SELECT, Fungsi Agregat |
-| Level 2 — Menengah | 7–18 | JOIN, Subquery, Index, Grouping, String/Date Functions, Relasi |
-| Level 3 — Lanjutan | 19–27 | Index Lanjutan, EXPLAIN, VIEW, Stored Procedure, Trigger, Event, Transaksi, Full-Text Search |
-| Level 4 — Expert | 28–38 | Window Functions, CTE, JSON, Generated Columns, Partisi, Security, Backup, Monitoring, Normalisasi, MySQL 8+ |
+**MySQLMaster** adalah platform pembelajaran MySQL berbasis browser — tidak perlu instalasi, tidak perlu server. Tulis SQL, eksekusi, dan lihat hasilnya langsung di browser menggunakan WebAssembly.
+
+Dirancang dari awal untuk pengalaman belajar yang terstruktur: setiap modul harus diselesaikan sebelum membuka modul berikutnya, ujian harus lulus dengan nilai minimal 70, dan setiap progres tercatat secara detail.
+
+```sql
+-- Selamat datang di MySQLMaster
+SELECT 'Belajar MySQL' AS mulai_dari,
+       'Browser' AS cukup_pakai,
+       'Gratis' AS harganya;
+```
 
 ---
 
-## Setup & Menjalankan
+## ✦ Fitur
+
+<table>
+<tr>
+<td width="50%">
+
+**🖥️ SQL Editor Interaktif**
+Monaco Editor (engine yang sama dengan VS Code) dengan syntax highlighting, autocomplete, dan eksekusi SQL langsung di browser via WebAssembly. Tidak perlu install MySQL.
+
+</td>
+<td width="50%">
+
+**📚 38 Modul Terstruktur**
+Dari `SELECT` dasar hingga Window Functions dan Performance Tuning. Setiap modul punya konten, contoh kode, dan ujian. Lock system memastikan urutan belajar yang benar.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**📝 Sistem Ujian**
+380+ soal pilihan ganda per modul dengan timer 15 menit dan grading otomatis. Nilai minimal 70 untuk lulus dan membuka modul berikutnya.
+
+</td>
+<td width="50%">
+
+**📊 Progress Dashboard**
+Streak harian, badge pencapaian, grafik aktivitas mingguan, dan statistik detail. Export/import progress ke JSON untuk backup antar device.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**🛡️ Sandbox Protection**
+Perintah berbahaya (`DROP TABLE`, `DELETE` tanpa `WHERE`, dll) diblokir dengan pesan error informatif. Sandbox aman untuk eksperimen.
+
+</td>
+<td width="50%">
+
+**📱 Responsive**
+Berfungsi di desktop, tablet, dan mobile. Sidebar collapsible dengan overlay di layar kecil.
+
+</td>
+</tr>
+</table>
+
+---
+
+## ✦ Kurikulum
+
+```
+LEVEL 01 — FONDASI                    6 modul
+├── Pengenalan Database & MySQL
+├── Tipe Data & Constraints
+├── DDL: CREATE, ALTER, DROP
+├── DML: INSERT, UPDATE, DELETE
+├── SELECT & Filtering Data
+└── Fungsi Agregat Dasar
+
+LEVEL 02 — MENENGAH                  12 modul
+├── Fungsi String & Numerik
+├── Agregasi & GROUP BY / HAVING
+├── JOIN: INNER, LEFT, RIGHT, FULL
+├── Subquery & Correlated Query
+├── Index & Optimasi Query
+└── ... dan 7 modul lainnya
+
+LEVEL 03 — LANJUTAN                   9 modul
+├── Stored Procedure & Function
+├── Trigger & Event Scheduler
+├── VIEW & Transaksi ACID
+├── Full-Text Search
+└── EXPLAIN & Query Analysis
+
+LEVEL 04 — EXPERT                    11 modul
+├── Window Functions & CTE
+├── JSON di MySQL 8+
+├── Performance Tuning
+├── Security & Privilege Management
+└── Backup, Replikasi & Monitoring
+```
+
+---
+
+## ✦ Tech Stack
+
+| Layer | Teknologi |
+|---|---|
+| UI Framework | React 19 + TypeScript |
+| Build Tool | Vite 8 |
+| Styling | Tailwind CSS + Plus Jakarta Sans |
+| Animasi | Framer Motion |
+| State Management | Zustand + localStorage persistence |
+| SQL Engine | sql.js (SQLite via WebAssembly) |
+| Code Editor | Monaco Editor (lazy-loaded) |
+| Charts | Recharts |
+| Routing | React Router v7 |
+
+---
+
+## ✦ Instalasi & Menjalankan
 
 ### Prasyarat
 - Node.js 18+
 - npm 9+
 
-### Instalasi
+### Langkah
 
 ```bash
-# Clone repository
-git clone <url-repo>
+# 1. Clone repository
+git clone https://github.com/username/mysql-learn.git
 cd mysql-learn
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Jalankan dev server
+# 3. Jalankan dev server
 npm run dev
 ```
 
-Buka `http://localhost:5173` di browser.
-
-### Build Production
+Buka **http://localhost:5173** di browser.
 
 ```bash
+# Build production
 npm run build
-```
 
-Output tersimpan di folder `dist/`.
-
-### Preview Build
-
-```bash
+# Preview build
 npm run preview
 ```
 
 ---
 
-## Struktur Folder
+## ✦ Struktur Proyek
 
 ```
 mysql-learn/
 ├── public/
-│   └── sql-wasm.wasm          # sql.js WebAssembly binary (self-hosted)
+│   └── sql-wasm.wasm              # sql.js WASM binary (self-hosted)
 ├── src/
 │   ├── components/
-│   │   ├── editor/            # SQLEditor + LazyMonaco wrapper
-│   │   ├── exam/              # ExamIntro, ExamResult
-│   │   ├── layout/            # PageLayout, Navbar, Sidebar
-│   │   ├── module/            # ModuleContent
-│   │   ├── ui/                # ProgressBar, BadgeDisplay, dll
-│   │   └── visuals/           # ModuleVisuals (diagram interaktif)
+│   │   ├── editor/                # SQLEditor + LazyMonaco wrapper
+│   │   ├── exam/                  # ExamIntro, ExamResult
+│   │   ├── layout/                # PageLayout, Sidebar (responsive)
+│   │   ├── module/                # ModuleContent
+│   │   └── ui/                    # ProgressBar, BadgeDisplay, dll
 │   ├── data/
-│   │   ├── modules/           # Konten 38 modul (topics, code examples, summary)
-│   │   └── exam/              # Soal ujian per modul
+│   │   ├── modules/               # Konten 38 modul
+│   │   ├── exam/                  # 380+ soal ujian
+│   │   └── databases/             # 5 sandbox database SQL
 │   ├── hooks/
-│   │   ├── useExamTimer.ts    # Countdown timer untuk ujian
-│   │   └── useModuleTimer.ts  # Tracking waktu belajar per modul
-│   ├── pages/
-│   │   ├── DashboardPage.tsx  # Halaman utama dengan statistik
-│   │   ├── ModulePage.tsx     # Halaman konten modul
-│   │   ├── ExamPage.tsx       # Halaman ujian
-│   │   ├── LevelPage.tsx      # Daftar modul per level
-│   │   └── ProfilePage.tsx    # Profil dan achievement
+│   │   ├── useExamTimer.ts        # Timer countdown ujian
+│   │   └── useModuleTimer.ts      # Tracking waktu belajar
+│   ├── pages/                     # Dashboard, Modul, Ujian, Level, Profil
 │   ├── store/
-│   │   └── progressStore.ts   # Zustand store dengan localStorage persistence
-│   ├── types/
-│   │   └── index.ts           # TypeScript type definitions
+│   │   └── progressStore.ts       # Zustand store + export/import
 │   └── utils/
-│       └── sqlRunner.ts       # sql.js engine + sandbox protection
+│       └── sqlRunner.ts           # sql.js engine + sandbox protection
 └── package.json
 ```
 
 ---
 
-## Cara Menggunakan
+## ✦ Cara Pakai
 
-1. **Buat nama pengguna** di halaman awal
-2. **Pilih modul** dari dashboard atau level page
-3. **Baca semua topik** dalam modul — tandai setiap topik sebagai sudah dibaca
-4. **Coba query** di SQL Playground di bawah halaman modul
-5. **Ambil ujian** setelah semua topik dibaca — nilai minimal 70 untuk lulus
-6. **Buka modul berikutnya** setelah lulus ujian
+1. **Buat username** di halaman awal
+2. **Pilih modul** dari dashboard — mulai dari Level 1
+3. **Baca semua topik** dan tandai sebagai selesai
+4. **Coba query** di SQL Playground di bagian bawah modul
+5. **Ambil ujian** — nilai minimal 70 untuk lulus
+6. **Ulangi** sampai 38 modul selesai
 
----
+### Backup Progress
 
-## Backup & Restore Progress
+Progress tersimpan di `localStorage`. Untuk backup:
 
-Progress disimpan di `localStorage` browser. Untuk mencadangkan:
+> Dashboard → scroll ke bawah → **Export Progress** → simpan file `.json`
 
-1. Buka **Dashboard**
-2. Scroll ke bawah ke bagian **"Backup & Restore Progress"**
-3. Klik **"↓ Export Progress"** untuk mengunduh file JSON
-4. Klik **"↑ Import Progress"** untuk memulihkan dari backup
+Untuk restore di device lain: **Import Progress** → pilih file backup.
 
 ---
 
-## Keterbatasan yang Diketahui
+## ✦ Keterbatasan
 
-- **Data tidak persisten antar browser/device** — progress tersimpan di localStorage browser saat ini saja. Gunakan fitur Export/Import untuk pindah device.
-- **sql.js bukan MySQL sungguhan** — beberapa fitur MySQL 8.0 (seperti window functions, JSON_TABLE) mungkin tidak tersedia atau berperilaku berbeda di sql.js (yang berbasis SQLite).
-- **Monaco Editor** di-lazy load — mungkin terjadi sedikit delay saat pertama kali membuka halaman modul dengan koneksi lambat.
-- **localStorage limit ~5MB** — jika storage browser penuh, akan muncul banner peringatan. Gunakan export untuk backup sebelum mencapai batas.
+- **localStorage only** — progress tidak sinkron antar device. Gunakan Export/Import.
+- **sql.js ≠ MySQL murni** — berbasis SQLite. Beberapa fitur MySQL 8.0 spesifik mungkin berperilaku berbeda.
+- **Bundle size ~1 MB** — Monaco Editor berkontribusi signifikan. Di-lazy load untuk mengurangi waktu load awal.
 
 ---
 
-## Lisensi
+## ✦ Lisensi
 
-Proyek ini dibuat untuk keperluan pembelajaran. Bebas digunakan dan dimodifikasi untuk tujuan non-komersial.
+Bebas digunakan dan dimodifikasi untuk tujuan pembelajaran dan non-komersial.
+
+---
+
+<div align="center">
+
+dibuat dengan ☕ dan banyak `SELECT * FROM kesabaran`
+
+</div>
