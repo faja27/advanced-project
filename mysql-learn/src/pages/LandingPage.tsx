@@ -84,7 +84,7 @@ export function LandingPage() {
   };
 
   return (
-    <div style={{ background: '#050810', color: '#e8f4fd', minHeight: '100vh', fontFamily: 'Syne, sans-serif' }}>
+    <div style={{ background: '#050810', color: '#e8f4fd', minHeight: '100vh', fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
 
       {/* NAVBAR */}
       <header
@@ -110,9 +110,9 @@ export function LandingPage() {
             </span>
           </div>
           <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: '#7a9cc4' }}>
-            <button onClick={() => navigate('/dashboard')} className="hover:text-white transition-colors" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'Syne', fontSize: 14, color: 'inherit' }}>Dashboard</button>
-            <button onClick={() => document.getElementById('kurikulum')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'Syne', fontSize: 14, color: 'inherit' }}>Kurikulum</button>
-            <button onClick={() => document.getElementById('fitur')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'Syne', fontSize: 14, color: 'inherit' }}>Fitur</button>
+            <button onClick={() => navigate('/dashboard')} className="hover:text-white transition-colors" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: '"Plus Jakarta Sans"', fontSize: 14, color: 'inherit' }}>Dashboard</button>
+            <button onClick={() => document.getElementById('kurikulum')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: '"Plus Jakarta Sans"', fontSize: 14, color: 'inherit' }}>Kurikulum</button>
+            <button onClick={() => document.getElementById('fitur')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: '"Plus Jakarta Sans"', fontSize: 14, color: 'inherit' }}>Fitur</button>
           </nav>
           {user.name ? (
             <button onClick={() => { updateStreak(); navigate('/dashboard'); }} className="btn-outline text-sm" style={{ padding: '8px 20px', fontSize: 13 }}>
@@ -140,7 +140,7 @@ export function LandingPage() {
         {SQL_KEYWORDS.slice(0, 8).map((kw, i) => (
           <div
             key={kw}
-            className="absolute pointer-events-none font-mono text-xs select-none"
+            className="absolute pointer-events-none font-sans text-xs select-none"
             style={{
               color: '#00d4ff',
               opacity: 0.04,
@@ -161,7 +161,7 @@ export function LandingPage() {
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono mb-8"
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-sans mb-8"
               style={{ background: '#00d4ff0a', border: '1px solid #00d4ff33', color: '#00d4ff' }}>
               <div className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
               Platform Belajar MySQL #1 di Indonesia
@@ -245,7 +245,7 @@ export function LandingPage() {
       <section id="fitur" className="py-24 px-6" style={{ background: '#0a0e1a' }}>
         <div className="max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <div className="text-xs font-mono mb-3" style={{ color: '#00d4ff' }}>// FITUR UNGGULAN</div>
+            <div className="text-xs font-sans mb-3" style={{ color: '#00d4ff' }}>// FITUR UNGGULAN</div>
             <h2 className="font-syne font-bold text-4xl mb-4" style={{ color: '#e8f4fd' }}>
               Semua yang kamu butuhkan<br />untuk <span className="gradient-text">menguasai MySQL</span>
             </h2>
@@ -283,7 +283,7 @@ export function LandingPage() {
       <section id="kurikulum" className="py-24 px-6" style={{ background: '#050810' }}>
         <div className="max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <div className="text-xs font-mono mb-3" style={{ color: '#8b5cf6' }}>// KURIKULUM</div>
+            <div className="text-xs font-sans mb-3" style={{ color: '#8b5cf6' }}>// KURIKULUM</div>
             <h2 className="font-syne font-bold text-4xl mb-4" style={{ color: '#e8f4fd' }}>
               4 Level, 38 Modul,<br /><span className="gradient-text">Satu Journey</span>
             </h2>
@@ -305,9 +305,9 @@ export function LandingPage() {
                 {/* Decorative number */}
                 <div className="absolute right-5 top-4 font-syne font-bold" style={{ fontSize: 64, color: lvl.color, opacity: 0.05, lineHeight: 1 }}>{lvl.num}</div>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: lvl.color + '15', color: lvl.color }}>Level {lvl.num}</span>
+                  <span className="text-xs font-sans px-2 py-0.5 rounded" style={{ background: lvl.color + '15', color: lvl.color }}>Level {lvl.num}</span>
                   <span className="font-syne font-bold text-sm" style={{ color: '#e8f4fd' }}>{lvl.name}</span>
-                  <span className="ml-auto text-xs font-mono" style={{ color: '#3d5a7a' }}>{lvl.mods} modul</span>
+                  <span className="ml-auto text-xs font-sans" style={{ color: '#3d5a7a' }}>{lvl.mods} modul</span>
                 </div>
                 <ul className="space-y-2">
                   {lvl.topics.map((t) => (
@@ -348,7 +348,7 @@ export function LandingPage() {
           <span style={{ color: '#00d4ff' }}>MySQL</span>
           <span style={{ color: '#e8f4fd' }}>Master</span>
         </div>
-        <div className="text-xs" style={{ color: '#3d5a7a', fontFamily: 'JetBrains Mono' }}>
+        <div className="text-xs" style={{ color: '#3d5a7a', fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
           Platform Belajar MySQL Interaktif · Open Source · Gratis
         </div>
       </footer>

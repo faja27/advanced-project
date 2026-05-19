@@ -31,7 +31,7 @@ export class SQLEditorErrorBoundary extends Component<Props, State> {
             textAlign: 'center',
             color: '#7a9cc4',
             background: '#0a0e1a',
-            fontFamily: 'monospace',
+            fontFamily: '"Plus Jakarta Sans", sans-serif',
             fontSize: '0.875rem',
           }}
         >

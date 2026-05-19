@@ -77,13 +77,13 @@ export function ProfilePage() {
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') { setUserName(newName); setEditName(false); } }}
-                    className="px-3 py-1.5 rounded-xl border text-sm outline-none font-mono"
+                    className="px-3 py-1.5 rounded-xl border text-sm outline-none font-sans"
                     style={{ background: '#050810', borderColor: '#00d4ff44', color: '#e8f4fd' }}
                   />
-                  <button onClick={() => { setUserName(newName); setEditName(false); }} className="px-3 py-1.5 rounded-xl text-xs font-bold font-mono" style={{ background: '#00d4ff', color: '#050810' }}>
+                  <button onClick={() => { setUserName(newName); setEditName(false); }} className="px-3 py-1.5 rounded-xl text-xs font-bold font-sans" style={{ background: '#00d4ff', color: '#050810' }}>
                     Simpan
                   </button>
-                  <button onClick={() => setEditName(false)} className="px-3 py-1.5 rounded-xl text-xs border font-mono" style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}>
+                  <button onClick={() => setEditName(false)} className="px-3 py-1.5 rounded-xl text-xs border font-sans" style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}>
                     Batal
                   </button>
                 </div>
@@ -92,23 +92,23 @@ export function ProfilePage() {
                   <span className="font-syne font-bold text-2xl" style={{ color: '#e8f4fd' }}>{user.name || 'User'}</span>
                   <button
                     onClick={() => setEditName(true)}
-                    className="text-xs px-2 py-0.5 rounded font-mono transition-all"
+                    className="text-xs px-2 py-0.5 rounded font-sans transition-all"
                     style={{ color: '#3d5a7a', border: '1px solid #1e2d4a' }}
                   >
                     Edit
                   </button>
                 </div>
               )}
-              <div className="text-xs font-mono mb-2" style={{ color: '#3d5a7a' }}>Bergabung sejak {joinDate}</div>
+              <div className="text-xs font-sans mb-2" style={{ color: '#3d5a7a' }}>Bergabung sejak {joinDate}</div>
               <div className="flex items-center gap-4 flex-wrap">
                 <div className="flex items-center gap-1.5">
                   <span>🔥</span>
-                  <span className="font-mono font-bold text-sm" style={{ color: '#ff9500' }}>{user.streak}</span>
-                  <span className="text-xs font-mono" style={{ color: '#3d5a7a' }}>hari streak</span>
+                  <span className="font-sans font-bold text-sm" style={{ color: '#ff9500' }}>{user.streak}</span>
+                  <span className="text-xs font-sans" style={{ color: '#3d5a7a' }}>hari streak</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-mono" style={{ color: '#3d5a7a' }}>Belajar:</span>
-                  <span className="font-mono font-bold text-sm" style={{ color: '#8b5cf6' }}>{user.totalStudyMinutes}m</span>
+                  <span className="text-xs font-sans" style={{ color: '#3d5a7a' }}>Belajar:</span>
+                  <span className="font-sans font-bold text-sm" style={{ color: '#8b5cf6' }}>{user.totalStudyMinutes}m</span>
                 </div>
               </div>
             </div>
@@ -134,7 +134,7 @@ export function ProfilePage() {
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <div className="font-syne font-bold text-lg" style={{ color: '#00d4ff' }}>{total}%</div>
-                <div className="text-xs font-mono" style={{ color: '#3d5a7a', fontSize: 9 }}>progress</div>
+                <div className="text-xs font-sans" style={{ color: '#3d5a7a', fontSize: 9 }}>progress</div>
               </div>
             </div>
           </div>
@@ -151,15 +151,15 @@ export function ProfilePage() {
             <div key={s.label} className="p-5 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #1e2d4a', borderLeft: `3px solid ${s.color}` }}>
               <div className="text-2xl mb-2">{s.icon}</div>
               <div className="font-syne font-bold text-2xl" style={{ color: s.color }}>{s.value}</div>
-              <div className="text-xs font-mono mt-0.5" style={{ color: '#3d5a7a' }}>{s.label}</div>
-              {s.sub && <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>{s.sub}</div>}
+              <div className="text-xs font-sans mt-0.5" style={{ color: '#3d5a7a' }}>{s.label}</div>
+              {s.sub && <div className="text-xs font-sans" style={{ color: '#3d5a7a' }}>{s.sub}</div>}
             </div>
           ))}
         </motion.div>
 
         {/* Level breakdown */}
         <motion.div variants={itemVariants} className="p-6 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
-          <div className="text-xs font-mono uppercase tracking-widest mb-4" style={{ color: '#3d5a7a' }}>Progress per Level</div>
+          <div className="text-xs font-sans uppercase tracking-widest mb-4" style={{ color: '#3d5a7a' }}>Progress per Level</div>
           <div className="space-y-4">
             {[1, 2, 3, 4].map((lvl) => {
               const { completed: lvlCompleted, total: lvlTotal } = getLevelProgress(lvl);
@@ -169,10 +169,10 @@ export function ProfilePage() {
                 <div key={lvl}>
                   <div className="flex items-center justify-between mb-1.5">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono px-1.5 py-0.5 rounded" style={{ background: meta.color + '15', color: meta.color }}>{meta.short}</span>
+                      <span className="text-xs font-sans px-1.5 py-0.5 rounded" style={{ background: meta.color + '15', color: meta.color }}>{meta.short}</span>
                       <span className="text-sm" style={{ color: '#7a9cc4' }}>{meta.name}</span>
                     </div>
-                    <span className="text-xs font-mono" style={{ color: '#3d5a7a' }}>{lvlCompleted}/{lvlTotal} · {pct}%</span>
+                    <span className="text-xs font-sans" style={{ color: '#3d5a7a' }}>{lvlCompleted}/{lvlTotal} · {pct}%</span>
                   </div>
                   <ProgressBar value={lvlCompleted} max={lvlTotal} color={meta.color} showLabel={false} height={5} />
                 </div>
@@ -184,8 +184,8 @@ export function ProfilePage() {
         {/* Activity chart */}
         <motion.div variants={itemVariants} className="p-6 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
           <div className="flex items-center justify-between mb-4">
-            <div className="text-xs font-mono uppercase tracking-widest" style={{ color: '#3d5a7a' }}>Aktivitas 7 Hari Terakhir</div>
-            <div className="text-xs font-mono" style={{ color: '#00d4ff' }}>
+            <div className="text-xs font-sans uppercase tracking-widest" style={{ color: '#3d5a7a' }}>Aktivitas 7 Hari Terakhir</div>
+            <div className="text-xs font-sans" style={{ color: '#00d4ff' }}>
               {activityChartData.reduce((s, d) => s + d.menit, 0)}m total
             </div>
           </div>
@@ -197,10 +197,10 @@ export function ProfilePage() {
                   <stop offset="95%" stopColor="#00d4ff" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <XAxis dataKey="date" tick={{ fill: '#3d5a7a', fontSize: 11, fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: '#3d5a7a', fontSize: 11, fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} unit="m" />
+              <XAxis dataKey="date" tick={{ fill: '#3d5a7a', fontSize: 11, fontFamily: '"Plus Jakarta Sans", sans-serif' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: '#3d5a7a', fontSize: 11, fontFamily: '"Plus Jakarta Sans", sans-serif' }} axisLine={false} tickLine={false} unit="m" />
               <Tooltip
-                contentStyle={{ background: '#0f1629', border: '1px solid #1e2d4a', borderRadius: 12, color: '#e8f4fd', fontSize: 12, fontFamily: 'JetBrains Mono' }}
+                contentStyle={{ background: '#0f1629', border: '1px solid #1e2d4a', borderRadius: 12, color: '#e8f4fd', fontSize: 12, fontFamily: '"Plus Jakarta Sans", sans-serif' }}
                 formatter={(v) => [`${v} menit`, 'Waktu Belajar']}
               />
               <Area type="monotone" dataKey="menit" stroke="#00d4ff" strokeWidth={2} fill="url(#actGradProfile)" dot={{ fill: '#00d4ff', strokeWidth: 0, r: 3 }} activeDot={{ r: 5, fill: '#00d4ff' }} />
@@ -210,7 +210,7 @@ export function ProfilePage() {
 
         {/* Badges */}
         <motion.div variants={itemVariants} className="p-6 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
-          <div className="text-xs font-mono uppercase tracking-widest mb-4" style={{ color: '#3d5a7a' }}>
+          <div className="text-xs font-sans uppercase tracking-widest mb-4" style={{ color: '#3d5a7a' }}>
             Badge & Pencapaian
             {achievements.length > 0 && <span className="ml-2 font-bold" style={{ color: '#00ff88' }}>{achievements.length} diraih</span>}
           </div>
@@ -225,7 +225,7 @@ export function ProfilePage() {
         {/* Completed modules */}
         {completedModules.length > 0 && (
           <motion.div variants={itemVariants} className="p-6 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
-            <div className="text-xs font-mono uppercase tracking-widest mb-4" style={{ color: '#3d5a7a' }}>
+            <div className="text-xs font-sans uppercase tracking-widest mb-4" style={{ color: '#3d5a7a' }}>
               Modul Selesai <span style={{ color: '#00ff88' }}>({completedModules.length})</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -235,10 +235,10 @@ export function ProfilePage() {
                 return (
                   <div key={m.id} className="flex items-center justify-between px-4 py-2.5 rounded-xl" style={{ background: '#050810', border: '1px solid #1e2d4a' }}>
                     <div className="flex items-center gap-2 min-w-0">
-                      <span className="text-xs font-mono flex-shrink-0" style={{ color: lvlColor }}>#{m.id}</span>
+                      <span className="text-xs font-sans flex-shrink-0" style={{ color: lvlColor }}>#{m.id}</span>
                       <span className="text-sm truncate" style={{ color: '#7a9cc4' }}>{m.title}</span>
                     </div>
-                    <span className="text-xs font-mono flex-shrink-0 ml-2" style={{ color: p?.examScore !== undefined && p.examScore !== null && p.examScore >= 70 ? '#00ff88' : '#3d5a7a' }}>
+                    <span className="text-xs font-sans flex-shrink-0 ml-2" style={{ color: p?.examScore !== undefined && p.examScore !== null && p.examScore >= 70 ? '#00ff88' : '#3d5a7a' }}>
                       {p?.examScore ?? '-'}%
                     </span>
                   </div>
@@ -250,7 +250,7 @@ export function ProfilePage() {
 
         {/* Danger zone */}
         <motion.div variants={itemVariants} className="p-6 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #ff6b3520' }}>
-          <div className="text-xs font-mono uppercase tracking-widest mb-1" style={{ color: '#ff6b35' }}>Zona Bahaya</div>
+          <div className="text-xs font-sans uppercase tracking-widest mb-1" style={{ color: '#ff6b35' }}>Zona Bahaya</div>
           <p className="text-sm mb-4" style={{ color: '#3d5a7a' }}>
             Reset semua progress, badge, dan statistik. Tindakan ini <strong style={{ color: '#ff6b35' }}>tidak dapat dibatalkan</strong>.
           </p>
@@ -262,7 +262,7 @@ export function ProfilePage() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setConfirmReset(true)}
-                className="px-4 py-2 rounded-xl text-xs font-bold font-mono border transition-all"
+                className="px-4 py-2 rounded-xl text-xs font-bold font-sans border transition-all"
                 style={{ borderColor: '#ff6b3544', color: '#ff6b35' }}
               >
                 Reset Semua Progress
@@ -280,14 +280,14 @@ export function ProfilePage() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => { resetProgress(); setConfirmReset(false); }}
-                    className="px-4 py-2 rounded-xl text-xs font-bold font-mono"
+                    className="px-4 py-2 rounded-xl text-xs font-bold font-sans"
                     style={{ background: '#ff6b35', color: '#050810' }}
                   >
                     Ya, Reset Sekarang
                   </button>
                   <button
                     onClick={() => setConfirmReset(false)}
-                    className="px-4 py-2 rounded-xl text-xs font-mono border"
+                    className="px-4 py-2 rounded-xl text-xs font-sans border"
                     style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}
                   >
                     Batal

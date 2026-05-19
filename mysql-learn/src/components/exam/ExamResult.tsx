@@ -62,7 +62,7 @@ function WriteQueryFeedback({ q, wqr }: { q: ExamQuestion; wqr: WriteQueryValida
         <div className="text-xs" style={{ color: '#3d5a7a' }}>Perbandingan hasil query:</div>
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <div className="text-xs font-mono mb-1" style={{ color: '#ff6b35' }}>Hasil query kamu</div>
+            <div className="text-xs font-sans mb-1" style={{ color: '#ff6b35' }}>Hasil query kamu</div>
             <div className="overflow-auto rounded-lg" style={{ background: '#050810', border: '1px solid #ff6b3520', maxHeight: 110 }}>
               <table style={{ fontSize: 10, borderCollapse: 'collapse', width: '100%' }}>
                 <thead><tr>{wqr.userResult.columns.map((col) => (
@@ -78,7 +78,7 @@ function WriteQueryFeedback({ q, wqr }: { q: ExamQuestion; wqr: WriteQueryValida
             </div>
           </div>
           <div>
-            <div className="text-xs font-mono mb-1" style={{ color: '#00ff88' }}>Hasil yang diharapkan</div>
+            <div className="text-xs font-sans mb-1" style={{ color: '#00ff88' }}>Hasil yang diharapkan</div>
             <div className="overflow-auto rounded-lg" style={{ background: '#050810', border: '1px solid #00ff8820', maxHeight: 110 }}>
               <table style={{ fontSize: 10, borderCollapse: 'collapse', width: '100%' }}>
                 <thead><tr>{wqr.expectedResult.columns.map((col) => (
@@ -137,21 +137,21 @@ export function ExamResult({
             {passed ? 'Selamat! Kamu Lulus!' : 'Belum Lulus — Coba Lagi'}
           </div>
           <div className="text-sm mb-2" style={{ color: '#7a9cc4' }}>Modul {moduleId}: {moduleName}</div>
-          <div className="text-sm font-mono" style={{ color: '#3d5a7a' }}>
+          <div className="text-sm font-sans" style={{ color: '#3d5a7a' }}>
             {correctCount}/{questions.length} benar · {totalPoints} poin total
           </div>
 
           <div className="flex gap-3 justify-center mt-6 flex-wrap">
             {!passed && (
-              <button onClick={onRetry} className="px-5 py-2.5 rounded-xl font-bold text-sm font-mono" style={{ background: levelColor, color: '#050810' }}>
+              <button onClick={onRetry} className="px-5 py-2.5 rounded-xl font-bold text-sm font-sans" style={{ background: levelColor, color: '#050810' }}>
                 Coba Lagi
               </button>
             )}
-            <button onClick={onBack} className="px-5 py-2.5 rounded-xl text-sm font-mono border" style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}>
+            <button onClick={onBack} className="px-5 py-2.5 rounded-xl text-sm font-sans border" style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}>
               Kembali ke Modul
             </button>
             {passed && onNext && (
-              <button onClick={onNext} className="px-5 py-2.5 rounded-xl font-bold text-sm font-mono" style={{ background: '#00ff8820', color: '#00ff88', border: '1px solid #00ff8833' }}>
+              <button onClick={onNext} className="px-5 py-2.5 rounded-xl font-bold text-sm font-sans" style={{ background: '#00ff8820', color: '#00ff88', border: '1px solid #00ff8833' }}>
                 Modul Berikutnya →
               </button>
             )}
@@ -159,7 +159,7 @@ export function ExamResult({
         </motion.div>
 
         <div className="space-y-4">
-          <div className="text-xs font-mono uppercase tracking-widest" style={{ color: '#3d5a7a' }}>Review Jawaban</div>
+          <div className="text-xs font-sans uppercase tracking-widest" style={{ color: '#3d5a7a' }}>Review Jawaban</div>
           {questions.map((q, i) => {
             const correct = checkCorrect(q, answers, writeQueryResults);
             return (
@@ -177,14 +177,14 @@ export function ExamResult({
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2 flex-wrap">
-                      <span className="text-xs font-mono" style={{ color: '#3d5a7a' }}>#{i + 1}</span>
-                      <span className="text-xs font-mono px-1.5 py-0.5 rounded" style={{
+                      <span className="text-xs font-sans" style={{ color: '#3d5a7a' }}>#{i + 1}</span>
+                      <span className="text-xs font-sans px-1.5 py-0.5 rounded" style={{
                         background: q.difficulty === 'easy' ? '#00ff8815' : q.difficulty === 'medium' ? '#00d4ff15' : '#8b5cf615',
                         color: q.difficulty === 'easy' ? '#00ff88' : q.difficulty === 'medium' ? '#00d4ff' : '#8b5cf6',
                       }}>
                         {q.difficulty}
                       </span>
-                      <span className="text-xs font-mono" style={{ color: '#3d5a7a' }}>{q.points}pt</span>
+                      <span className="text-xs font-sans" style={{ color: '#3d5a7a' }}>{q.points}pt</span>
                     </div>
                     <div className="text-sm font-bold mb-2" style={{ color: '#e8f4fd' }}>{q.question}</div>
                     <div className="text-xs mb-1" style={{ color: '#3d5a7a' }}>

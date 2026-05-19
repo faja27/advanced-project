@@ -25,8 +25,9 @@ export default {
         'border-color': '#30363d',
       },
       fontFamily: {
-        sans: ['Syne', 'sans-serif'],
-        syne: ['Syne', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        syne: ['"Plus Jakarta Sans"', 'sans-serif'],
+        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       animation: {

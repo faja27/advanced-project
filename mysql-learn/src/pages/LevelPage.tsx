@@ -48,18 +48,18 @@ export function LevelPage() {
               {id}
             </div>
             <div className="flex-1">
-              <div className="text-xs font-mono mb-1" style={{ color: '#3d5a7a' }}>Level {id.toString().padStart(2, '0')}</div>
+              <div className="text-xs font-sans mb-1" style={{ color: '#3d5a7a' }}>Level {id.toString().padStart(2, '0')}</div>
               <h1 className="font-syne font-bold text-2xl mb-1" style={{ color: '#e8f4fd' }}>{meta.name}</h1>
               <p className="text-sm" style={{ color: '#7a9cc4' }}>{meta.desc}</p>
             </div>
             <div className="text-right flex-shrink-0">
               <div className="font-syne font-bold text-3xl" style={{ color: meta.color }}>{completed}/{total}</div>
-              <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>modul selesai</div>
+              <div className="text-xs font-sans" style={{ color: '#3d5a7a' }}>modul selesai</div>
             </div>
           </div>
           <div className="mt-5">
             <ProgressBar value={completed} max={total} color={meta.color} showLabel={false} height={8} />
-            <div className="text-xs font-mono mt-1.5" style={{ color: '#3d5a7a' }}>{Math.round((completed / total) * 100)}% progress level</div>
+            <div className="text-xs font-sans mt-1.5" style={{ color: '#3d5a7a' }}>{Math.round((completed / total) * 100)}% progress level</div>
           </div>
         </motion.div>
 
@@ -92,7 +92,7 @@ export function LevelPage() {
                   <div className="absolute inset-0 flex items-center justify-center rounded-2xl" style={{ background: '#0a0e1a80', backdropFilter: 'blur(2px)', zIndex: 1 }}>
                     <div className="flex flex-col items-center gap-2">
                       <div style={{ color: '#3d5a7a' }}><IconLock /></div>
-                      <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>Terkunci</div>
+                      <div className="text-xs font-sans" style={{ color: '#3d5a7a' }}>Terkunci</div>
                     </div>
                   </div>
                 )}
@@ -100,22 +100,22 @@ export function LevelPage() {
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: meta.color + '15', color: meta.color }}>#{m.id}</span>
-                      <span className="text-xs font-mono" style={{ color: '#3d5a7a' }}>~{m.estimatedMinutes}m</span>
+                      <span className="text-xs font-sans px-2 py-0.5 rounded" style={{ background: meta.color + '15', color: meta.color }}>#{m.id}</span>
+                      <span className="text-xs font-sans" style={{ color: '#3d5a7a' }}>~{m.estimatedMinutes}m</span>
                       {p?.status === 'completed' && (
-                        <span className="text-xs font-mono px-1.5 py-0.5 rounded" style={{ background: '#00ff8815', color: '#00ff88' }}>✓</span>
+                        <span className="text-xs font-sans px-1.5 py-0.5 rounded" style={{ background: '#00ff8815', color: '#00ff88' }}>✓</span>
                       )}
                     </div>
                     <div className="font-syne font-bold mb-1" style={{ color: '#e8f4fd' }}>{m.title}</div>
                     <div className="text-xs line-clamp-2" style={{ color: '#7a9cc4' }}>{m.description}</div>
-                    <div className="text-xs mt-2 font-mono" style={{ color: '#3d5a7a' }}>{m.topics.length} topik</div>
+                    <div className="text-xs mt-2 font-sans" style={{ color: '#3d5a7a' }}>{m.topics.length} topik</div>
                   </div>
                   <div className="flex flex-col items-end gap-2 flex-shrink-0">
-                    <span className="text-xs font-bold font-mono" style={{ color: unlocked ? statusColor : '#3d5a7a' }}>
+                    <span className="text-xs font-bold font-sans" style={{ color: unlocked ? statusColor : '#3d5a7a' }}>
                       {unlocked ? statusLabel : '🔒'}
                     </span>
                     {p?.examScore !== null && p?.examScore !== undefined && (
-                      <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: p.examScore >= 70 ? '#00ff8815' : '#ff6b3515', color: p.examScore >= 70 ? '#00ff88' : '#ff6b35' }}>
+                      <span className="text-xs font-sans px-2 py-0.5 rounded" style={{ background: p.examScore >= 70 ? '#00ff8815' : '#ff6b3515', color: p.examScore >= 70 ? '#00ff88' : '#ff6b35' }}>
                         {p.examScore}%
                       </span>
                     )}

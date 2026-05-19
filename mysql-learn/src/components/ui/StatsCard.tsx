@@ -24,11 +24,11 @@ export function StatsCard({ icon, label, value, color = '#00d4ff', sub }: Props)
       {/* Subtle bg glow */}
       <div className="absolute top-0 right-0 w-20 h-20 rounded-full pointer-events-none" style={{ background: color + '08', filter: 'blur(20px)', transform: 'translate(30%, -30%)' }} />
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-mono uppercase tracking-widest" style={{ color: '#3d5a7a' }}>{label}</span>
+        <span className="text-xs font-sans uppercase tracking-widest" style={{ color: '#3d5a7a' }}>{label}</span>
         <div className="opacity-20" style={{ color }}>{icon}</div>
       </div>
       <div className="text-3xl font-bold font-syne" style={{ color }}>{value}</div>
-      {sub && <div className="text-xs mt-1.5" style={{ color: '#3d5a7a', fontFamily: 'JetBrains Mono' }}>{sub}</div>}
+      {sub && <div className="text-xs mt-1.5" style={{ color: '#3d5a7a', fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{sub}</div>}
     </motion.div>
   );
 }

@@ -32,10 +32,10 @@ export function ExamIntro({ moduleId, moduleName, levelColor, questions, totalPo
         </div>
 
         <div className="text-center mb-8">
-          <div className="text-xs font-mono mb-1" style={{ color: '#3d5a7a' }}>Ujian Modul {moduleId}</div>
+          <div className="text-xs font-sans mb-1" style={{ color: '#3d5a7a' }}>Ujian Modul {moduleId}</div>
           <h1 className="font-syne font-bold text-2xl mb-2" style={{ color: '#e8f4fd' }}>{moduleName}</h1>
           {prevScore !== null && prevScore !== undefined && (
-            <div className="text-sm font-mono" style={{ color: prevScore >= 70 ? '#00ff88' : '#ff6b35' }}>
+            <div className="text-sm font-sans" style={{ color: prevScore >= 70 ? '#00ff88' : '#ff6b35' }}>
               Skor terakhir: {prevScore}%
             </div>
           )}
@@ -49,13 +49,13 @@ export function ExamIntro({ moduleId, moduleName, levelColor, questions, totalPo
           ].map((item) => (
             <div key={item.label} className="p-3 rounded-xl text-center" style={{ background: '#050810', border: '1px solid #1e2d4a' }}>
               <div className="font-syne font-bold text-xl" style={{ color: item.color }}>{item.value}</div>
-              <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>{item.label}</div>
+              <div className="text-xs font-sans" style={{ color: '#3d5a7a' }}>{item.label}</div>
             </div>
           ))}
         </div>
 
         <div className="p-4 rounded-xl mb-6" style={{ background: '#050810', border: '1px solid #1e2d4a' }}>
-          <div className="text-xs font-mono mb-3" style={{ color: '#3d5a7a' }}>DISTRIBUSI SOAL</div>
+          <div className="text-xs font-sans mb-3" style={{ color: '#3d5a7a' }}>DISTRIBUSI SOAL</div>
           <div className="space-y-2">
             {[
               { label: 'Easy', count: easyQ, pts: '1 poin', color: '#00ff88' },
@@ -69,7 +69,7 @@ export function ExamIntro({ moduleId, moduleName, levelColor, questions, totalPo
                 </div>
                 <div className="flex items-center gap-3">
                   <span style={{ color: '#3d5a7a' }}>{d.pts}</span>
-                  <span className="font-mono font-bold" style={{ color: '#7a9cc4' }}>{d.count}x</span>
+                  <span className="font-sans font-bold" style={{ color: '#7a9cc4' }}>{d.count}x</span>
                 </div>
               </div>
             ))}

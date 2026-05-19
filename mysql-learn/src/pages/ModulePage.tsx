@@ -30,9 +30,9 @@ export function ModulePage() {
     return (
       <PageLayout>
         <div className="flex flex-col items-center justify-center min-h-64 gap-4">
-          <div className="text-6xl font-mono" style={{ color: '#1e2d4a' }}>404</div>
+          <div className="text-6xl font-sans" style={{ color: '#1e2d4a' }}>404</div>
           <div style={{ color: '#7a9cc4' }}>Modul tidak ditemukan</div>
-          <button onClick={() => navigate('/dashboard')} className="text-sm font-mono px-4 py-2 rounded-lg border" style={{ borderColor: '#1e2d4a', color: '#00d4ff' }}>
+          <button onClick={() => navigate('/dashboard')} className="text-sm font-sans px-4 py-2 rounded-lg border" style={{ borderColor: '#1e2d4a', color: '#00d4ff' }}>
             ← Kembali ke Dashboard
           </button>
         </div>
@@ -54,7 +54,7 @@ export function ModulePage() {
     <PageLayout>
       {/* Module Header */}
       <div className="mb-4 p-5 rounded-2xl" style={{ background: '#0f1629', border: `1px solid #1e2d4a`, borderLeft: `4px solid ${levelColor}` }}>
-        <div className="flex items-center gap-2 text-xs font-mono mb-3" style={{ color: '#3d5a7a' }}>
+        <div className="flex items-center gap-2 text-xs font-sans mb-3" style={{ color: '#3d5a7a' }}>
           <button onClick={() => navigate('/dashboard')} className="transition-colors hover:text-cyan-400" style={{ color: '#00d4ff' }}>Dashboard</button>
           <span>/</span>
           <button onClick={() => navigate(`/level/${modul.level}`)} className="transition-colors hover:text-cyan-400" style={{ color: '#00d4ff' }}>Level {modul.level}</button>
@@ -64,11 +64,11 @@ export function ModulePage() {
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2 flex-wrap">
-              <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: levelColor + '15', color: levelColor }}>Level {modul.level}</span>
-              <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: '#1e2d4a', color: '#7a9cc4' }}>~{modul.estimatedMinutes}m</span>
-              <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: '#1e2d4a', color: '#7a9cc4' }}>{modul.topics.length} topik</span>
+              <span className="text-xs font-sans px-2 py-0.5 rounded" style={{ background: levelColor + '15', color: levelColor }}>Level {modul.level}</span>
+              <span className="text-xs font-sans px-2 py-0.5 rounded" style={{ background: '#1e2d4a', color: '#7a9cc4' }}>~{modul.estimatedMinutes}m</span>
+              <span className="text-xs font-sans px-2 py-0.5 rounded" style={{ background: '#1e2d4a', color: '#7a9cc4' }}>{modul.topics.length} topik</span>
               {moduleProgress?.status === 'completed' && (
-                <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: '#00ff8815', color: '#00ff88' }}>✓ Selesai</span>
+                <span className="text-xs font-sans px-2 py-0.5 rounded" style={{ background: '#00ff8815', color: '#00ff88' }}>✓ Selesai</span>
               )}
             </div>
             <h1 className="font-syne font-bold text-2xl mb-1" style={{ color: '#e8f4fd' }}>{modul.title}</h1>
@@ -77,7 +77,7 @@ export function ModulePage() {
           <button
             onClick={() => allRead ? navigate(`/ujian/${id}`) : undefined}
             disabled={!allRead || moduleProgress?.status === 'completed'}
-            className="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-bold font-mono transition-all"
+            className="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-bold font-sans transition-all"
             style={{
               background: allRead && moduleProgress?.status !== 'completed' ? levelColor : '#1e2d4a',
               color: allRead && moduleProgress?.status !== 'completed' ? '#050810' : '#3d5a7a',
@@ -88,7 +88,7 @@ export function ModulePage() {
           </button>
         </div>
         <div className="mt-4">
-          <div className="flex justify-between text-xs font-mono mb-1.5" style={{ color: '#3d5a7a' }}>
+          <div className="flex justify-between text-xs font-sans mb-1.5" style={{ color: '#3d5a7a' }}>
             <span>Topik terbaca</span><span>{readCount}/{modul.topics.length}</span>
           </div>
           <ProgressBar value={readCount} max={modul.topics.length} color={levelColor} showLabel={false} height={4} />
@@ -116,7 +116,7 @@ export function ModulePage() {
             <div className="w-3 h-3 rounded-full" style={{ background: '#febc2e' }} />
             <div className="w-3 h-3 rounded-full" style={{ background: '#28c840' }} />
           </div>
-          <span className="text-xs font-mono" style={{ color: '#3d5a7a' }}>playground.sql — Coba Sendiri</span>
+          <span className="text-xs font-sans" style={{ color: '#3d5a7a' }}>playground.sql — Coba Sendiri</span>
         </div>
         <SQLEditorErrorBoundary>
           <SQLEditor dbType={modul.database} />
@@ -151,16 +151,16 @@ export function ModulePage() {
             )}
             <div className="flex gap-3 flex-wrap">
               {moduleProgress?.status !== 'completed' && (
-                <button onClick={() => navigate(`/ujian/${id}`)} className="px-5 py-2.5 rounded-xl font-bold text-sm font-mono transition-all" style={{ background: levelColor, color: '#050810' }}>
+                <button onClick={() => navigate(`/ujian/${id}`)} className="px-5 py-2.5 rounded-xl font-bold text-sm font-sans transition-all" style={{ background: levelColor, color: '#050810' }}>
                   Ambil Ujian →
                 </button>
               )}
               {moduleProgress?.status === 'completed' && id < 38 && (
-                <button onClick={() => navigate(`/modul/${id + 1}`)} className="px-5 py-2.5 rounded-xl font-bold text-sm font-mono" style={{ background: '#00ff8820', color: '#00ff88', border: '1px solid #00ff8833' }}>
+                <button onClick={() => navigate(`/modul/${id + 1}`)} className="px-5 py-2.5 rounded-xl font-bold text-sm font-sans" style={{ background: '#00ff8820', color: '#00ff88', border: '1px solid #00ff8833' }}>
                   Modul Berikutnya →
                 </button>
               )}
-              <button onClick={() => navigate(`/level/${modul.level}`)} className="px-5 py-2.5 rounded-xl text-sm font-mono border" style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}>
+              <button onClick={() => navigate(`/level/${modul.level}`)} className="px-5 py-2.5 rounded-xl text-sm font-sans border" style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}>
                 ← Kembali ke Level
               </button>
             </div>

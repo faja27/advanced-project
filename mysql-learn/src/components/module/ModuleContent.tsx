@@ -55,7 +55,7 @@ export function ModuleContent({ modul, moduleProgress, activeTopicIdx, onTopicCh
       {/* Left: Topic List */}
       <div className="w-full lg:w-[260px] flex-shrink-0 overflow-y-auto" style={{ background: '#050810', borderRight: '1px solid #1e2d4a' }}>
         <div className="p-3 border-b" style={{ borderColor: '#1e2d4a' }}>
-          <div className="text-xs font-mono uppercase tracking-widest" style={{ color: '#3d5a7a' }}>Topik</div>
+          <div className="text-xs font-sans uppercase tracking-widest" style={{ color: '#3d5a7a' }}>Topik</div>
         </div>
         <div className="py-2">
           {modul.topics.map((t, i) => {
@@ -75,7 +75,7 @@ export function ModuleContent({ modul, moduleProgress, activeTopicIdx, onTopicCh
                   {read && <span style={{ color: '#00ff88', fontSize: 9, lineHeight: 1 }}>✓</span>}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-xs font-mono mb-0.5" style={{ color: active ? levelColor : read ? '#00ff88' : '#3d5a7a' }}>
+                  <div className="text-xs font-sans mb-0.5" style={{ color: active ? levelColor : read ? '#00ff88' : '#3d5a7a' }}>
                     {String(i + 1).padStart(2, '0')}
                   </div>
                   <div className="text-xs leading-snug" style={{ color: active ? '#e8f4fd' : read ? '#7a9cc4' : '#4a6a8a' }}>
@@ -101,11 +101,11 @@ export function ModuleContent({ modul, moduleProgress, activeTopicIdx, onTopicCh
           >
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-mono" style={{ color: '#3d5a7a' }}>
+                <span className="text-xs font-sans" style={{ color: '#3d5a7a' }}>
                   {String(activeTopicIdx + 1).padStart(2, '0')} / {String(modul.topics.length).padStart(2, '0')}
                 </span>
                 {isRead && (
-                  <span className="text-xs font-mono px-1.5 py-0.5 rounded" style={{ background: '#00ff8815', color: '#00ff88' }}>✓ Dibaca</span>
+                  <span className="text-xs font-sans px-1.5 py-0.5 rounded" style={{ background: '#00ff8815', color: '#00ff88' }}>✓ Dibaca</span>
                 )}
               </div>
               <h2 className="font-syne font-bold text-2xl" style={{ color: '#e8f4fd' }}>{activeTopic.title}</h2>
@@ -124,7 +124,7 @@ export function ModuleContent({ modul, moduleProgress, activeTopicIdx, onTopicCh
                     <circle cx="7" cy="7" r="6" stroke="#00d4ff" strokeWidth="1.2"/>
                     <path d="M7 6v4M7 4.5v.5" stroke="#00d4ff" strokeWidth="1.2" strokeLinecap="round"/>
                   </svg>
-                  <span className="text-xs font-bold font-mono uppercase tracking-widest" style={{ color: '#00d4ff' }}>Tips</span>
+                  <span className="text-xs font-bold font-sans uppercase tracking-widest" style={{ color: '#00d4ff' }}>Tips</span>
                 </div>
                 <div className="space-y-1.5">
                   {activeTopic.tips.map((tip, i) => (
@@ -146,7 +146,7 @@ export function ModuleContent({ modul, moduleProgress, activeTopicIdx, onTopicCh
                     <path d="M7 2L12.5 12H1.5L7 2Z" stroke="#ff6b35" strokeWidth="1.2" strokeLinejoin="round"/>
                     <path d="M7 6v3M7 10.5v.5" stroke="#ff6b35" strokeWidth="1.2" strokeLinecap="round"/>
                   </svg>
-                  <span className="text-xs font-bold font-mono uppercase tracking-widest" style={{ color: '#ff6b35' }}>Kesalahan Umum</span>
+                  <span className="text-xs font-bold font-sans uppercase tracking-widest" style={{ color: '#ff6b35' }}>Kesalahan Umum</span>
                 </div>
                 <div className="space-y-1.5">
                   {activeTopic.commonMistakes.map((m, i) => (
@@ -167,7 +167,7 @@ export function ModuleContent({ modul, moduleProgress, activeTopicIdx, onTopicCh
               <button
                 onClick={() => activeTopicIdx > 0 && onTopicChange(activeTopicIdx - 1)}
                 disabled={activeTopicIdx === 0}
-                className="text-sm px-4 py-2 rounded-xl border font-mono transition-all disabled:opacity-30"
+                className="text-sm px-4 py-2 rounded-xl border font-sans transition-all disabled:opacity-30"
                 style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}
               >
                 ← Sebelumnya
@@ -175,7 +175,7 @@ export function ModuleContent({ modul, moduleProgress, activeTopicIdx, onTopicCh
               <button
                 onClick={onMarkRead}
                 disabled={!!isRead}
-                className="text-sm px-5 py-2 rounded-xl font-bold font-mono transition-all"
+                className="text-sm px-5 py-2 rounded-xl font-bold font-sans transition-all"
                 style={{
                   background: isRead ? '#00ff8815' : levelColor,
                   color: isRead ? '#00ff88' : '#050810',

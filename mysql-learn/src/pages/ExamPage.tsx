@@ -57,9 +57,9 @@ export function ExamPage() {
     return (
       <PageLayout>
         <div className="flex flex-col items-center justify-center min-h-64 gap-4">
-          <div className="text-5xl font-mono" style={{ color: '#1e2d4a' }}>404</div>
+          <div className="text-5xl font-sans" style={{ color: '#1e2d4a' }}>404</div>
           <div style={{ color: '#7a9cc4' }}>Ujian untuk modul ini belum tersedia.</div>
-          <button onClick={() => navigate(`/modul/${id}`)} className="text-sm font-mono px-4 py-2 rounded-lg border" style={{ borderColor: '#1e2d4a', color: '#00d4ff' }}>
+          <button onClick={() => navigate(`/modul/${id}`)} className="text-sm font-sans px-4 py-2 rounded-lg border" style={{ borderColor: '#1e2d4a', color: '#00d4ff' }}>
             ← Kembali ke Modul
           </button>
         </div>
@@ -154,13 +154,13 @@ export function ExamPage() {
         {/* Header */}
         <div className="flex items-center justify-between p-4 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
           <div>
-            <div className="text-xs font-mono mb-0.5" style={{ color: '#3d5a7a' }}>Ujian · Modul {id}</div>
+            <div className="text-xs font-sans mb-0.5" style={{ color: '#3d5a7a' }}>Ujian · Modul {id}</div>
             <div className="font-syne font-bold text-sm" style={{ color: '#e8f4fd' }}>{modul.title}</div>
           </div>
           <motion.div
             animate={timerPulse ? { scale: [1, 1.05, 1] } : {}}
             transition={{ repeat: timerPulse ? Infinity : 0, duration: 0.8 }}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl font-mono font-bold text-lg"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl font-sans font-bold text-lg"
             style={{ background: timerColor + '15', border: `1px solid ${timerColor}33`, color: timerColor }}
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -173,7 +173,7 @@ export function ExamPage() {
 
         {/* Progress + dot nav */}
         <div>
-          <div className="flex items-center justify-between text-xs font-mono mb-2" style={{ color: '#3d5a7a' }}>
+          <div className="flex items-center justify-between text-xs font-sans mb-2" style={{ color: '#3d5a7a' }}>
             <span>Soal {currentIdx + 1} / {questions.length}</span>
             <span>{answeredCount}/{questions.length} dijawab</span>
           </div>
@@ -181,7 +181,7 @@ export function ExamPage() {
           <div className="flex flex-wrap gap-1.5 mt-3">
             {questions.map((q, i) => (
               <button key={q.id} onClick={() => setCurrentIdx(i)} title={`Soal ${i + 1}`}
-                className="w-7 h-7 rounded-lg text-xs font-bold font-mono transition-all"
+                className="w-7 h-7 rounded-lg text-xs font-bold font-sans transition-all"
                 style={{
                   background: i === currentIdx ? levelColor : answers[q.id] ? '#00ff8820' : '#1e2d4a',
                   color: i === currentIdx ? '#050810' : answers[q.id] ? '#00ff88' : '#3d5a7a',
@@ -199,12 +199,12 @@ export function ExamPage() {
           <motion.div key={currentIdx} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }}>
             <div className="p-6 rounded-2xl space-y-4" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono px-2 py-0.5 rounded" style={{
+                <span className="text-xs font-sans px-2 py-0.5 rounded" style={{
                   background: current.difficulty === 'easy' ? '#00ff8815' : current.difficulty === 'medium' ? '#00d4ff15' : '#8b5cf615',
                   color: current.difficulty === 'easy' ? '#00ff88' : current.difficulty === 'medium' ? '#00d4ff' : '#8b5cf6',
                 }}>{current.difficulty}</span>
-                <span className="text-xs font-mono" style={{ color: '#3d5a7a' }}>{current.points} poin</span>
-                {answers[current.id] && <span className="text-xs font-mono" style={{ color: '#00ff88' }}>✓ Dijawab</span>}
+                <span className="text-xs font-sans" style={{ color: '#3d5a7a' }}>{current.points} poin</span>
+                {answers[current.id] && <span className="text-xs font-sans" style={{ color: '#00ff88' }}>✓ Dijawab</span>}
               </div>
               <p className="font-syne font-bold text-base leading-relaxed" style={{ color: '#e8f4fd' }}>{current.question}</p>
               {current.context && (
@@ -221,7 +221,7 @@ export function ExamPage() {
                         className="w-full text-left px-4 py-3 rounded-xl text-sm transition-all flex items-center gap-3"
                         style={{ background: selected ? levelColor + '15' : '#050810', border: `1px solid ${selected ? levelColor : '#1e2d4a'}`, color: selected ? '#e8f4fd' : '#7a9cc4' }}
                       >
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full border flex items-center justify-center text-xs font-mono font-bold"
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full border flex items-center justify-center text-xs font-sans font-bold"
                           style={{ borderColor: selected ? levelColor : '#1e2d4a', background: selected ? levelColor : 'transparent', color: selected ? '#050810' : '#3d5a7a' }}
                         >{String.fromCharCode(65 + oi)}</span>
                         {opt}
@@ -247,16 +247,16 @@ export function ExamPage() {
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <button onClick={() => setCurrentIdx(Math.max(0, currentIdx - 1))} disabled={currentIdx === 0}
-            className="px-4 py-2 rounded-xl border text-sm font-mono disabled:opacity-30 transition-all"
+            className="px-4 py-2 rounded-xl border text-sm font-sans disabled:opacity-30 transition-all"
             style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}
           >← Sebelumnya</button>
           {currentIdx < questions.length - 1 ? (
-            <button onClick={() => setCurrentIdx(currentIdx + 1)} className="px-5 py-2 rounded-xl text-sm font-bold font-mono transition-all" style={{ background: '#1e2d4a', color: '#e8f4fd' }}>
+            <button onClick={() => setCurrentIdx(currentIdx + 1)} className="px-5 py-2 rounded-xl text-sm font-bold font-sans transition-all" style={{ background: '#1e2d4a', color: '#e8f4fd' }}>
               Berikutnya →
             </button>
           ) : (
             <button onClick={() => void handleSubmitWithAnswers(answers, false)} disabled={!allAnswered || isValidating}
-              className="px-6 py-2.5 rounded-xl text-sm font-bold font-mono transition-all disabled:opacity-40 flex items-center gap-2"
+              className="px-6 py-2.5 rounded-xl text-sm font-bold font-sans transition-all disabled:opacity-40 flex items-center gap-2"
               style={{ background: allAnswered && !isValidating ? levelColor : '#1e2d4a', color: allAnswered && !isValidating ? '#050810' : '#3d5a7a' }}
             >
               {isValidating ? <><span style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}>⟳</span> Memvalidasi query...</> : 'Kumpulkan Ujian ✓'}
@@ -264,7 +264,7 @@ export function ExamPage() {
           )}
         </div>
         {!allAnswered && currentIdx === questions.length - 1 && (
-          <p className="text-xs text-center font-mono" style={{ color: '#3d5a7a' }}>{questions.length - answeredCount} soal belum dijawab</p>
+          <p className="text-xs text-center font-sans" style={{ color: '#3d5a7a' }}>{questions.length - answeredCount} soal belum dijawab</p>
         )}
       </div>
     </PageLayout>

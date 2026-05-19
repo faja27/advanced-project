@@ -27,7 +27,7 @@ export function ProgressBar({ value, max = 100, color = '#00d4ff', showLabel = t
         />
       </div>
       {showLabel && (
-        <span className="text-xs mt-1 block font-mono" style={{ color: '#3d5a7a' }}>{pct}%</span>
+        <span className="text-xs mt-1 block font-sans" style={{ color: '#3d5a7a' }}>{pct}%</span>
       )}
     </div>
   );

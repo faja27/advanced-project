@@ -34,7 +34,7 @@ function IconLock() {
 const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: { value: number }[]; label?: string }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-xl px-3 py-2 text-xs font-mono" style={{ background: '#151e35', border: '1px solid #1e2d4a', color: '#e8f4fd' }}>
+      <div className="rounded-xl px-3 py-2 text-xs font-sans" style={{ background: '#151e35', border: '1px solid #1e2d4a', color: '#e8f4fd' }}>
         <div style={{ color: '#7a9cc4' }}>{label}</div>
         <div style={{ color: '#00d4ff' }}>{payload[0].value} menit</div>
       </div>
@@ -147,7 +147,7 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
         {/* HEADER */}
         <motion.div variants={itemVariants} className="flex items-start justify-between flex-wrap gap-4">
           <div>
-            <div className="text-xs font-mono mb-1" style={{ color: '#3d5a7a' }}>{dateStr} · {timeStr}</div>
+            <div className="text-xs font-sans mb-1" style={{ color: '#3d5a7a' }}>{dateStr} · {timeStr}</div>
             <h1 className="font-syne font-bold text-3xl" style={{ color: '#e8f4fd' }}>
               Selamat datang, <span style={{ color: '#00d4ff' }}>{user.name || 'Pelajar'}</span> 👋
             </h1>
@@ -181,9 +181,9 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
               style={{ background: '#0f1629', border: `1px solid #1e2d4a`, borderLeft: `3px solid ${card.color}` }}
             >
               <div className="absolute right-4 top-4 opacity-10" style={{ color: card.color }}>{card.icon}</div>
-              <div className="text-xs font-mono mb-3 uppercase tracking-widest" style={{ color: '#3d5a7a' }}>{card.label}</div>
+              <div className="text-xs font-sans mb-3 uppercase tracking-widest" style={{ color: '#3d5a7a' }}>{card.label}</div>
               <div className="font-syne font-bold text-3xl mb-1" style={{ color: card.color }}>{card.value}</div>
-              <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>{card.sub}</div>
+              <div className="text-xs font-sans" style={{ color: '#3d5a7a' }}>{card.sub}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -193,7 +193,7 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
           <div className="flex justify-between items-center mb-4">
             <div>
               <div className="font-syne font-bold" style={{ color: '#e8f4fd' }}>Progress Keseluruhan</div>
-              <div className="text-xs font-mono mt-0.5" style={{ color: '#3d5a7a' }}>{completedCount}/38 modul selesai</div>
+              <div className="text-xs font-sans mt-0.5" style={{ color: '#3d5a7a' }}>{completedCount}/38 modul selesai</div>
             </div>
             <div className="font-syne font-bold text-4xl" style={{ color: '#00d4ff' }}>{total}%</div>
           </div>
@@ -207,14 +207,14 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
             <div className="flex items-center justify-between mb-5">
               <div>
                 <div className="font-syne font-bold" style={{ color: '#e8f4fd' }}>Aktivitas Belajar</div>
-                <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>7 hari terakhir</div>
+                <div className="text-xs font-sans" style={{ color: '#3d5a7a' }}>7 hari terakhir</div>
               </div>
             </div>
             {hasActivity ? (
               <ResponsiveContainer width="100%" height={160}>
                 <BarChart data={activityData} barSize={24}>
-                  <XAxis dataKey="date" tick={{ fill: '#3d5a7a', fontSize: 11, fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fill: '#3d5a7a', fontSize: 11, fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} unit="m" width={35} />
+                  <XAxis dataKey="date" tick={{ fill: '#3d5a7a', fontSize: 11, fontFamily: '"Plus Jakarta Sans", sans-serif' }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fill: '#3d5a7a', fontSize: 11, fontFamily: '"Plus Jakarta Sans", sans-serif' }} axisLine={false} tickLine={false} unit="m" width={35} />
                   <Tooltip content={<CustomTooltip />} cursor={{ fill: '#00d4ff08' }} />
                   <Bar dataKey="menit" radius={[4, 4, 0, 0]}>
                     {activityData.map((entry, index) => (
@@ -231,7 +231,7 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
                   <rect x="24" y="8" width="6" height="28" rx="2" fill="currentColor"/>
                   <rect x="34" y="16" width="6" height="20" rx="2" fill="currentColor"/>
                 </svg>
-                <div className="text-sm font-mono">Belum ada aktivitas minggu ini</div>
+                <div className="text-sm font-sans">Belum ada aktivitas minggu ini</div>
                 <div className="text-xs mt-1">Mulai belajar untuk melihat grafik!</div>
               </div>
             )}
@@ -255,12 +255,12 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
                       className="flex items-center gap-3 cursor-pointer p-3 rounded-xl transition-all"
                       style={{ background: '#151e35', border: '1px solid #1e2d4a' }}
                     >
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono flex-shrink-0" style={{ background: statusColor + '15', color: statusColor, border: `1px solid ${statusColor}22` }}>
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-sans flex-shrink-0" style={{ background: statusColor + '15', color: statusColor, border: `1px solid ${statusColor}22` }}>
                         {p.status === 'completed' ? '✓' : `${mid}`}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="text-xs font-bold truncate" style={{ color: '#e8f4fd' }}>{mod.title}</div>
-                        <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>Modul {mid} · Level {mod.level}</div>
+                        <div className="text-xs font-sans" style={{ color: '#3d5a7a' }}>Modul {mid} · Level {mod.level}</div>
                       </div>
                     </motion.div>
                   );
@@ -298,17 +298,17 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
                   )}
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ background: lvl.color + '15', color: lvl.color }}>Level {lvl.id}</span>
+                      <span className="text-xs font-sans px-2 py-0.5 rounded" style={{ background: lvl.color + '15', color: lvl.color }}>Level {lvl.id}</span>
                       <div className="font-syne font-bold mt-1.5" style={{ color: '#e8f4fd' }}>{lvl.name}</div>
                       <div className="text-xs mt-0.5" style={{ color: '#7a9cc4' }}>{lvl.desc}</div>
                     </div>
                     <div className="text-right flex-shrink-0">
                       <div className="font-syne font-bold" style={{ color: lvl.color }}>{c}/{t}</div>
-                      <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>{pct}%</div>
+                      <div className="text-xs font-sans" style={{ color: '#3d5a7a' }}>{pct}%</div>
                     </div>
                   </div>
                   <ProgressBar value={c} max={t} color={lvl.color} showLabel={false} height={4} />
-                  {!unlocked && <div className="text-xs mt-2 font-mono" style={{ color: '#3d5a7a' }}>🔒 Selesaikan level sebelumnya</div>}
+                  {!unlocked && <div className="text-xs mt-2 font-sans" style={{ color: '#3d5a7a' }}>🔒 Selesaikan level sebelumnya</div>}
                 </motion.div>
               );
             })}
@@ -320,7 +320,7 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
           <motion.div variants={itemVariants} className="p-6 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
             <div className="flex items-center justify-between mb-4">
               <div className="font-syne font-bold" style={{ color: '#e8f4fd' }}>Badge Diraih</div>
-              <button onClick={() => navigate('/profile')} className="text-xs font-mono" style={{ color: '#00d4ff', background: 'none', border: 'none', cursor: 'pointer' }}>Lihat semua →</button>
+              <button onClick={() => navigate('/profile')} className="text-xs font-sans" style={{ color: '#00d4ff', background: 'none', border: 'none', cursor: 'pointer' }}>Lihat semua →</button>
             </div>
             <BadgeDisplay earned={achievements} />
           </motion.div>
@@ -331,11 +331,11 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
           <div className="flex items-center justify-between mb-4">
             <div>
               <div className="font-syne font-bold" style={{ color: '#e8f4fd' }}>Akses Cepat</div>
-              <div className="text-xs font-mono mt-0.5" style={{ color: '#3d5a7a' }}>
+              <div className="text-xs font-sans mt-0.5" style={{ color: '#3d5a7a' }}>
                 {lastAccessed.length > 0 ? 'Lanjutkan dari terakhir' : 'Mulai dari awal'}
               </div>
             </div>
-            <button onClick={() => navigate('/level/1')} className="text-xs font-mono" style={{ color: '#00d4ff', background: 'none', border: 'none', cursor: 'pointer' }}>Lihat semua →</button>
+            <button onClick={() => navigate('/level/1')} className="text-xs font-sans" style={{ color: '#00d4ff', background: 'none', border: 'none', cursor: 'pointer' }}>Lihat semua →</button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {quickAccessModules.map((m, idx) => {
@@ -357,13 +357,13 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5 mb-0.5">
-                      <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>Modul {m.id}</div>
-                      {isLastAccessed && <div className="text-xs font-mono px-1 rounded" style={{ background: lvlColor + '20', color: lvlColor }}>terakhir</div>}
+                      <div className="text-xs font-sans" style={{ color: '#3d5a7a' }}>Modul {m.id}</div>
+                      {isLastAccessed && <div className="text-xs font-sans px-1 rounded" style={{ background: lvlColor + '20', color: lvlColor }}>terakhir</div>}
                     </div>
                     <div className="text-sm font-bold truncate" style={{ color: '#e8f4fd' }}>{m.title}</div>
-                    <div className="text-xs mt-0.5 font-mono" style={{ color: lvlColor }}>Level {m.level}</div>
+                    <div className="text-xs mt-0.5 font-sans" style={{ color: lvlColor }}>Level {m.level}</div>
                   </div>
-                  <div className="flex-shrink-0 ml-3 text-xs font-bold font-mono" style={{ color: unlocked ? statusColor : '#3d5a7a' }}>
+                  <div className="flex-shrink-0 ml-3 text-xs font-bold font-sans" style={{ color: unlocked ? statusColor : '#3d5a7a' }}>
                     {unlocked ? statusLabel : '🔒'}
                   </div>
                 </motion.div>
@@ -375,18 +375,18 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
         {/* EXPORT / IMPORT */}
         <motion.div variants={itemVariants} className="p-5 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
           <div className="font-syne font-bold mb-1" style={{ color: '#e8f4fd' }}>Backup & Restore Progress</div>
-          <p className="text-xs font-mono mb-4" style={{ color: '#3d5a7a' }}>Export progress ke file JSON atau import dari backup sebelumnya.</p>
+          <p className="text-xs font-sans mb-4" style={{ color: '#3d5a7a' }}>Export progress ke file JSON atau import dari backup sebelumnya.</p>
           <div className="flex gap-3 flex-wrap">
             <button
               onClick={handleExport}
-              className="px-4 py-2 rounded-xl text-sm font-bold font-mono transition-all"
+              className="px-4 py-2 rounded-xl text-sm font-bold font-sans transition-all"
               style={{ background: '#00d4ff15', color: '#00d4ff', border: '1px solid #00d4ff33' }}
             >
               ↓ Export Progress
             </button>
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="px-4 py-2 rounded-xl text-sm font-bold font-mono transition-all"
+              className="px-4 py-2 rounded-xl text-sm font-bold font-sans transition-all"
               style={{ background: '#8b5cf615', color: '#8b5cf6', border: '1px solid #8b5cf633' }}
             >
               ↑ Import Progress
@@ -394,12 +394,12 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
             <input ref={fileInputRef} type="file" accept=".json" className="hidden" onChange={handleFileChange} />
           </div>
           {importSuccess && (
-            <div className="mt-3 text-xs font-mono px-3 py-2 rounded-lg" style={{ background: '#00ff8815', color: '#00ff88', border: '1px solid #00ff8833' }}>
+            <div className="mt-3 text-xs font-sans px-3 py-2 rounded-lg" style={{ background: '#00ff8815', color: '#00ff88', border: '1px solid #00ff8833' }}>
               ✓ Progress berhasil diimport!
             </div>
           )}
           {importError && (
-            <div className="mt-3 text-xs font-mono px-3 py-2 rounded-lg" style={{ background: '#ff3d3d15', color: '#ff6b6b', border: '1px solid #ff3d3d33' }}>
+            <div className="mt-3 text-xs font-sans px-3 py-2 rounded-lg" style={{ background: '#ff3d3d15', color: '#ff6b6b', border: '1px solid #ff3d3d33' }}>
               ✗ {importError}
             </div>
           )}
@@ -416,14 +416,14 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
               <div className="flex gap-3">
                 <button
                   onClick={handleImportConfirm}
-                  className="flex-1 py-2 rounded-xl text-sm font-bold font-mono"
+                  className="flex-1 py-2 rounded-xl text-sm font-bold font-sans"
                   style={{ background: '#8b5cf6', color: '#e8f4fd' }}
                 >
                   Ya, Import
                 </button>
                 <button
                   onClick={() => setImportConfirm(null)}
-                  className="flex-1 py-2 rounded-xl text-sm font-mono border"
+                  className="flex-1 py-2 rounded-xl text-sm font-sans border"
                   style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}
                 >
                   Batal

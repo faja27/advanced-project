@@ -59,7 +59,7 @@ export class ErrorBoundary extends Component<Props, State> {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontFamily: 'monospace',
+            fontFamily: '"Plus Jakarta Sans", sans-serif',
             padding: '2rem',
           }}
         >

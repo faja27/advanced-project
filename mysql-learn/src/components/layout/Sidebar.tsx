@@ -90,7 +90,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
             <span style={{ color: '#00d4ff' }}>MySQL</span>
             <span style={{ color: '#e8f4fd' }}>Master</span>
           </div>
-          <div className="text-xs" style={{ color: '#3d5a7a', fontFamily: 'JetBrains Mono' }}>v1.0 · 38 Modul</div>
+          <div className="text-xs" style={{ color: '#3d5a7a', fontFamily: '"Plus Jakarta Sans", sans-serif' }}>v1.0 · 38 Modul</div>
         </div>
       </div>
 
@@ -116,7 +116,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
                 <span style={{ color: isActive ? (item.color || '#00d4ff') : '#3d5a7a', flexShrink: 0 }}>
                   <item.Icon />
                 </span>
-                <span style={{ fontFamily: 'Syne, sans-serif', fontSize: '12px' }}>{item.label}</span>
+                <span style={{ fontFamily: '"Plus Jakarta Sans", sans-serif', fontSize: '12px' }}>{item.label}</span>
               </>
             )}
           </NavLink>
@@ -124,7 +124,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
 
         {/* Level mini-progress */}
         <div className="mt-4 px-1">
-          <div className="text-xs font-mono mb-2" style={{ color: '#3d5a7a' }}>LEVEL PROGRESS</div>
+          <div className="text-xs font-sans mb-2" style={{ color: '#3d5a7a' }}>LEVEL PROGRESS</div>
           {[1,2,3,4].map((lvl) => {
             const { completed: c, total: t } = getLevelProgress(lvl);
             const pct = Math.round((c / t) * 100);
@@ -132,7 +132,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
             return (
               <div key={lvl} className="mb-2">
                 <div className="flex justify-between text-xs mb-1" style={{ color: '#3d5a7a' }}>
-                  <span style={{ fontFamily: 'JetBrains Mono' }}>Lv.{lvl} {LEVEL_NAMES[lvl-1]}</span>
+                  <span style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Lv.{lvl} {LEVEL_NAMES[lvl-1]}</span>
                   <span style={{ color }}>{c}/{LEVEL_MODS[lvl-1][1]-LEVEL_MODS[lvl-1][0]+1}</span>
                 </div>
                 <div className="rounded-full overflow-hidden" style={{ height: 3, background: '#1e2d4a' }}>
@@ -155,12 +155,12 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="text-xs font-bold truncate" style={{ color: '#e8f4fd' }}>{user.name || 'Guest'}</div>
-            <div className="flex items-center gap-1 text-xs" style={{ color: '#ff6b35', fontFamily: 'JetBrains Mono' }}>
+            <div className="flex items-center gap-1 text-xs" style={{ color: '#ff6b35', fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
               <span>🔥</span>
               <span>{user.streak} hari</span>
             </div>
           </div>
-          <div className="text-xs font-bold" style={{ color: '#00d4ff', fontFamily: 'JetBrains Mono' }}>
+          <div className="text-xs font-bold" style={{ color: '#00d4ff', fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
             {completed}<span style={{ color: '#3d5a7a' }}>/38</span>
           </div>
         </div>
