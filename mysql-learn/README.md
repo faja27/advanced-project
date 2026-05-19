@@ -1,4 +1,4 @@
-<div align="center">
+<div align="left">
 
 <img src="https://img.shields.io/badge/version-1.0.0-00e5ff?style=flat-square" />
 <img src="https://img.shields.io/badge/status-production--ready-00e5ff?style=flat-square" />
@@ -30,7 +30,7 @@
 
 ## ✦ Tentang Proyek
 
-**MySQLMaster** adalah platform pembelajaran MySQL berbasis browser — tidak perlu instalasi, tidak perlu server. Tulis SQL, eksekusi, dan lihat hasilnya langsung di browser menggunakan WebAssembly.
+**MySQLMaster** adalah platform pembelajaran MySQL berbasis browser tidak perlu instalasi, tidak perlu server. Tulis SQL, eksekusi, dan lihat hasilnya langsung di browser menggunakan WebAssembly.
 
 Dirancang dari awal untuk pengalaman belajar yang terstruktur: setiap modul harus diselesaikan sebelum membuka modul berikutnya, ujian harus lulus dengan nilai minimal 70, dan setiap progres tercatat secara detail.
 
@@ -235,7 +235,7 @@ Untuk restore di device lain: **Import Progress** → pilih file backup.
 
 ## ✦ Lisensi
 
-Bebas digunakan dan dimodifikasi untuk tujuan pembelajaran dan non-komersial.
+Bebas digunakan dan dimodifikasi untuk tujuan pembelajaran dan non komersial.
 
 ---
 
