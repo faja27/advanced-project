@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
@@ -45,9 +45,13 @@ const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?:
 
 export function DashboardPage() {
   const navigate = useNavigate();
-  const { user, progress, dailyActivity, getTotalProgress, getLevelProgress, isModuleUnlocked, isLevelUnlocked, achievements } = useProgressStore();
+  const { user, progress, dailyActivity, getTotalProgress, getLevelProgress, isModuleUnlocked, isLevelUnlocked, achievements, exportProgress, importProgress } = useProgressStore();
   const total = getTotalProgress();
   const [time, setTime] = useState(new Date());
+  const [importConfirm, setImportConfirm] = useState<string | null>(null);
+  const [importError, setImportError] = useState<string | null>(null);
+  const [importSuccess, setImportSuccess] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const t = setInterval(() => setTime(new Date()), 1000);
@@ -68,6 +72,18 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
     ? parseInt(lastAccessed[0][0].replace('modul_', ''))
     : 1;
 
+  const quickAccessModules = (() => {
+    if (lastAccessed.length === 0) return modulesData.slice(0, 6);
+    const lastMod = modulesData.find((m) => m.id === continueModuleId);
+    const incomplete = modulesData.filter(
+      (m) => m.id !== continueModuleId && progress[`modul_${m.id}`]?.status !== 'completed',
+    );
+    const after = incomplete.filter((m) => m.id > continueModuleId);
+    const before = incomplete.filter((m) => m.id < continueModuleId);
+    const ordered = [...after, ...before].slice(0, 5);
+    return lastMod ? [lastMod, ...ordered] : ordered.slice(0, 6);
+  })();
+
   const activityData = (() => {
     const days = [];
     for (let i = 6; i >= 0; i--) {
@@ -86,6 +102,43 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
 
   const containerVariants = { hidden: {}, visible: { transition: { staggerChildren: 0.07 } } };
   const itemVariants = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
+
+  const handleExport = () => {
+    const json = exportProgress();
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mysql-learn-progress-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const text = ev.target?.result as string;
+      setImportConfirm(text);
+      setImportError(null);
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
+
+  const handleImportConfirm = () => {
+    if (!importConfirm) return;
+    const result = importProgress(importConfirm);
+    if (result.success) {
+      setImportSuccess(true);
+      setImportConfirm(null);
+      setTimeout(() => setImportSuccess(false), 3000);
+    } else {
+      setImportError(result.error ?? 'Import gagal.');
+      setImportConfirm(null);
+    }
+  };
 
   return (
     <PageLayout>
@@ -276,29 +329,39 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
         {/* QUICK ACCESS MODULES */}
         <motion.div variants={itemVariants}>
           <div className="flex items-center justify-between mb-4">
-            <div className="font-syne font-bold" style={{ color: '#e8f4fd' }}>Modul Tersedia</div>
+            <div>
+              <div className="font-syne font-bold" style={{ color: '#e8f4fd' }}>Akses Cepat</div>
+              <div className="text-xs font-mono mt-0.5" style={{ color: '#3d5a7a' }}>
+                {lastAccessed.length > 0 ? 'Lanjutkan dari terakhir' : 'Mulai dari awal'}
+              </div>
+            </div>
             <button onClick={() => navigate('/level/1')} className="text-xs font-mono" style={{ color: '#00d4ff', background: 'none', border: 'none', cursor: 'pointer' }}>Lihat semua →</button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {modulesData.slice(0, 9).map((m) => {
+            {quickAccessModules.map((m, idx) => {
               const key = `modul_${m.id}`;
               const p = progress[key];
               const unlocked = isModuleUnlocked(m.id);
               const statusColor = p?.status === 'completed' ? '#00ff88' : p?.status === 'in_progress' ? '#00d4ff' : '#3d5a7a';
               const statusLabel = p?.status === 'completed' ? '✓ Selesai' : p?.status === 'in_progress' ? '▶ Lanjut' : 'Mulai';
-              const lvlColor = LEVEL_INFO.find((l) => l.modules.includes(m.id))?.color || '#00d4ff';
+              const lvlInfo = LEVEL_INFO.find((l) => l.modules.includes(m.id));
+              const lvlColor = lvlInfo?.color || '#00d4ff';
+              const isLastAccessed = idx === 0 && lastAccessed.length > 0 && m.id === continueModuleId;
               return (
                 <motion.div
                   key={m.id}
                   whileHover={unlocked ? { y: -2, borderColor: lvlColor + '44' } : {}}
                   onClick={() => unlocked && navigate(`/modul/${m.id}`)}
                   className={`p-4 rounded-xl flex items-center justify-between transition-all ${unlocked ? 'cursor-pointer' : 'opacity-40'}`}
-                  style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}
+                  style={{ background: '#0f1629', border: `1px solid ${isLastAccessed ? lvlColor + '33' : '#1e2d4a'}` }}
                 >
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-mono mb-0.5" style={{ color: '#3d5a7a' }}>Modul {m.id}</div>
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <div className="text-xs font-mono" style={{ color: '#3d5a7a' }}>Modul {m.id}</div>
+                      {isLastAccessed && <div className="text-xs font-mono px-1 rounded" style={{ background: lvlColor + '20', color: lvlColor }}>terakhir</div>}
+                    </div>
                     <div className="text-sm font-bold truncate" style={{ color: '#e8f4fd' }}>{m.title}</div>
-                    <div className="text-xs mt-0.5 font-mono" style={{ color: '#3d5a7a' }}>~{m.estimatedMinutes} menit</div>
+                    <div className="text-xs mt-0.5 font-mono" style={{ color: lvlColor }}>Level {m.level}</div>
                   </div>
                   <div className="flex-shrink-0 ml-3 text-xs font-bold font-mono" style={{ color: unlocked ? statusColor : '#3d5a7a' }}>
                     {unlocked ? statusLabel : '🔒'}
@@ -308,6 +371,67 @@ const scores = Object.values(progress).filter((p) => p.examScore !== null).map((
             })}
           </div>
         </motion.div>
+
+        {/* EXPORT / IMPORT */}
+        <motion.div variants={itemVariants} className="p-5 rounded-2xl" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
+          <div className="font-syne font-bold mb-1" style={{ color: '#e8f4fd' }}>Backup & Restore Progress</div>
+          <p className="text-xs font-mono mb-4" style={{ color: '#3d5a7a' }}>Export progress ke file JSON atau import dari backup sebelumnya.</p>
+          <div className="flex gap-3 flex-wrap">
+            <button
+              onClick={handleExport}
+              className="px-4 py-2 rounded-xl text-sm font-bold font-mono transition-all"
+              style={{ background: '#00d4ff15', color: '#00d4ff', border: '1px solid #00d4ff33' }}
+            >
+              ↓ Export Progress
+            </button>
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="px-4 py-2 rounded-xl text-sm font-bold font-mono transition-all"
+              style={{ background: '#8b5cf615', color: '#8b5cf6', border: '1px solid #8b5cf633' }}
+            >
+              ↑ Import Progress
+            </button>
+            <input ref={fileInputRef} type="file" accept=".json" className="hidden" onChange={handleFileChange} />
+          </div>
+          {importSuccess && (
+            <div className="mt-3 text-xs font-mono px-3 py-2 rounded-lg" style={{ background: '#00ff8815', color: '#00ff88', border: '1px solid #00ff8833' }}>
+              ✓ Progress berhasil diimport!
+            </div>
+          )}
+          {importError && (
+            <div className="mt-3 text-xs font-mono px-3 py-2 rounded-lg" style={{ background: '#ff3d3d15', color: '#ff6b6b', border: '1px solid #ff3d3d33' }}>
+              ✗ {importError}
+            </div>
+          )}
+        </motion.div>
+
+        {/* IMPORT CONFIRMATION MODAL */}
+        {importConfirm && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(5, 8, 16, 0.85)' }}>
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="rounded-2xl p-6 max-w-sm w-full" style={{ background: '#0f1629', border: '1px solid #1e2d4a' }}>
+              <div className="font-syne font-bold text-lg mb-2" style={{ color: '#e8f4fd' }}>Konfirmasi Import</div>
+              <p className="text-sm mb-5" style={{ color: '#7a9cc4' }}>
+                Progress kamu saat ini akan <span style={{ color: '#ff6b6b' }}>ditimpa</span> dengan data dari file ini. Lanjutkan?
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={handleImportConfirm}
+                  className="flex-1 py-2 rounded-xl text-sm font-bold font-mono"
+                  style={{ background: '#8b5cf6', color: '#e8f4fd' }}
+                >
+                  Ya, Import
+                </button>
+                <button
+                  onClick={() => setImportConfirm(null)}
+                  className="flex-1 py-2 rounded-xl text-sm font-mono border"
+                  style={{ borderColor: '#1e2d4a', color: '#7a9cc4' }}
+                >
+                  Batal
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
 
       </motion.div>
     </PageLayout>

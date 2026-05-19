@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import Editor from '@monaco-editor/react';
+import { LazyMonaco } from './LazyMonaco';
 import { motion, AnimatePresence } from 'framer-motion';
 import { runQuery, resetDatabase, warmupSQL } from '../../utils/sqlRunner';
 import { databases } from '../../data/databases';
@@ -103,7 +103,7 @@ export function SQLEditor({ dbType, initialQuery = 'SELECT * FROM produk LIMIT 1
 
       {/* Editor */}
       <div onKeyDown={handleKeyDown}>
-        <Editor
+        <LazyMonaco
           height="160px"
           language="sql"
           value={query}

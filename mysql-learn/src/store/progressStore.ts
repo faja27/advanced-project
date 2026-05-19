@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import type { ProgressData, ModuleProgress } from '../types';
 
+let _notifyStorageFailure: (() => void) | null = null;
+
 const safeStorage = createJSONStorage(() => ({
   getItem: (key: string): string | null => {
     try {
@@ -16,6 +18,7 @@ const safeStorage = createJSONStorage(() => ({
       localStorage.setItem(key, value);
     } catch (e) {
       console.warn('[progressStore] localStorage.setItem failed (storage full?):', e);
+      _notifyStorageFailure?.();
     }
   },
   removeItem: (key: string): void => {
@@ -45,6 +48,7 @@ const defaultProgress = (): Record<string, ModuleProgress> => {
 };
 
 interface ProgressStore extends ProgressData {
+  storageWarning: boolean;
   setUserName: (name: string) => void;
   markTopicRead: (modulId: number, topicId: string) => void;
   saveExamScore: (modulId: number, score: number) => void;
@@ -53,6 +57,8 @@ interface ProgressStore extends ProgressData {
   updateStreak: () => void;
   addStudyMinutes: (minutes: number) => void;
   resetProgress: () => void;
+  exportProgress: () => string;
+  importProgress: (json: string) => { success: boolean; error?: string };
   isModuleUnlocked: (modulId: number) => boolean;
   isLevelUnlocked: (levelId: number) => boolean;
   getLevelProgress: (levelId: number) => { completed: number; total: number };
@@ -86,6 +92,7 @@ export const useProgressStore = create<ProgressStore>()(
       progress: defaultProgress(),
       achievements: [],
       dailyActivity: {},
+      storageWarning: false,
 
       setUserName: (name) =>
         set((s) => ({ user: { ...s.user, name } })),
@@ -163,9 +170,9 @@ export const useProgressStore = create<ProgressStore>()(
             }
 
             // speed_learner: 3 modules completed today
-            const today = new Date().toDateString();
+            const today = new Date().toISOString().split('T')[0];
             const completedToday = Object.values(newProgress).filter(
-              (p) => p.completedAt && new Date(p.completedAt).toDateString() === today
+              (p) => p.completedAt && new Date(p.completedAt).toISOString().split('T')[0] === today
             ).length;
             if (completedToday >= 3) addIfMissing('speed_learner');
           }
@@ -195,9 +202,9 @@ export const useProgressStore = create<ProgressStore>()(
 
       updateStreak: () =>
         set((s) => {
-          const today = new Date().toDateString();
-          const lastActive = new Date(s.user.lastActive).toDateString();
-          const yesterday = new Date(Date.now() - 86400000).toDateString();
+          const today = new Date().toISOString().split('T')[0];
+          const lastActive = new Date(s.user.lastActive).toISOString().split('T')[0];
+          const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
           let streak = s.user.streak;
           if (lastActive === today) return s;
           if (lastActive === yesterday) {
@@ -230,6 +237,43 @@ export const useProgressStore = create<ProgressStore>()(
           achievements: [],
           dailyActivity: {},
         }),
+
+      exportProgress: () => {
+        const s = get();
+        const data = {
+          version: 1,
+          exportedAt: new Date().toISOString(),
+          user: s.user,
+          progress: s.progress,
+          achievements: s.achievements,
+          dailyActivity: s.dailyActivity,
+        };
+        return JSON.stringify(data, null, 2);
+      },
+
+      importProgress: (json: string) => {
+        try {
+          const data = JSON.parse(json) as {
+            version?: number;
+            user?: ProgressData['user'];
+            progress?: Record<string, ModuleProgress>;
+            achievements?: string[];
+            dailyActivity?: ProgressData['dailyActivity'];
+          };
+          if (!data.user || !data.progress) {
+            return { success: false, error: 'Format file tidak valid — field user atau progress tidak ditemukan.' };
+          }
+          set({
+            user: data.user,
+            progress: { ...defaultProgress(), ...data.progress },
+            achievements: Array.isArray(data.achievements) ? data.achievements : [],
+            dailyActivity: data.dailyActivity ?? {},
+          });
+          return { success: true };
+        } catch {
+          return { success: false, error: 'File bukan JSON yang valid.' };
+        }
+      },
 
       isModuleUnlocked: (modulId) => {
         const { progress } = get();
@@ -293,3 +337,5 @@ export const useProgressStore = create<ProgressStore>()(
     }
   )
 );
+
+_notifyStorageFailure = () => useProgressStore.setState({ storageWarning: true });

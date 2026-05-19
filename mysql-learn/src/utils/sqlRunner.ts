@@ -7,7 +7,7 @@ async function getSQL() {
   if (!SQL) {
     const initSqlJs = (await import('sql.js')).default;
     SQL = await initSqlJs({
-      locateFile: (file: string) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/${file}`,
+      locateFile: (file: string) => `/${file}`,
     });
   }
   return SQL;
@@ -37,15 +37,19 @@ export function resetDatabase(dbName: string): void {
 
 // ─── Query Safety ──────────────────────────────────────────────────────────
 
-const FORBIDDEN_PATTERNS = [
-  /\bDROP\s+DATABASE\b/i,
-  /\bTRUNCATE\s+TABLE\b/i,
+const FORBIDDEN_PATTERNS: Array<{ pattern: RegExp; message: string }> = [
+  { pattern: /\bDROP\s+DATABASE\b/i, message: 'Query ini tidak diizinkan di editor pembelajaran' },
+  { pattern: /\bTRUNCATE\s+TABLE\b/i, message: 'Query ini tidak diizinkan di editor pembelajaran' },
+  { pattern: /\bDROP\s+TABLE\b/i, message: 'Perintah DROP TABLE tidak diizinkan di sandbox. Reload halaman untuk reset database.' },
+  { pattern: /DELETE\s+FROM\s+\w+\s*;/i, message: 'Perintah DELETE FROM tanpa WHERE tidak diizinkan di sandbox. Tambahkan kondisi WHERE untuk membatasi baris yang dihapus.' },
+  { pattern: /UPDATE\s+\w+\s+SET\b(?![^;]*\bWHERE\b)[^;]*;/i, message: 'Perintah UPDATE tanpa WHERE tidak diizinkan di sandbox. Tambahkan kondisi WHERE untuk membatasi baris yang diperbarui.' },
+  { pattern: /ALTER\s+TABLE\s+\w+.*\bDROP\s+COLUMN\b/i, message: 'Perintah ALTER TABLE DROP COLUMN tidak diizinkan di sandbox.' },
 ];
 
 function sanitizeQuery(query: string): string | null {
-  for (const pattern of FORBIDDEN_PATTERNS) {
+  for (const { pattern, message } of FORBIDDEN_PATTERNS) {
     if (pattern.test(query)) {
-      return 'Query ini tidak diizinkan di editor pembelajaran';
+      return message;
     }
   }
   return null;

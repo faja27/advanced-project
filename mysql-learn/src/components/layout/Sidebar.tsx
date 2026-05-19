@@ -43,26 +43,41 @@ const MENU = [
   { to: '/profile', label: 'Profil & Statistik', Icon: IconProfile },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  mobileOpen?: boolean;
+  onClose?: () => void;
+}
+
+export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
   const { user, getTotalProgress, progress, getLevelProgress } = useProgressStore();
   const navigate = useNavigate();
   const total = getTotalProgress();
   const completed = Object.values(progress).filter((p) => p.status === 'completed').length;
 
   return (
-    <motion.aside
-      initial={{ x: -260 }}
-      animate={{ x: 0 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="fixed left-0 top-0 h-screen flex flex-col z-40"
+    <aside
+      className={`fixed left-0 top-0 h-screen flex-col z-40 transition-transform duration-300
+        ${mobileOpen ? 'flex' : 'hidden lg:flex'}`}
       style={{ width: 240, background: '#050810', borderRight: '1px solid #1e2d4a' }}
     >
-      {/* Logo */}
+      {/* Logo + mobile close */}
       <div
         className="px-5 py-5 cursor-pointer flex items-center gap-3"
         style={{ borderBottom: '1px solid #1e2d4a' }}
         onClick={() => navigate('/')}
       >
+        {onClose && (
+          <button
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
+            className="lg:hidden absolute right-3 top-4 p-1.5 rounded-lg"
+            style={{ color: '#7a9cc4', background: '#1e2d4a' }}
+            aria-label="Tutup menu"
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </button>
+        )}
         <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#00d4ff15', border: '1px solid #00d4ff30' }}>
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <ellipse cx="9" cy="5" rx="7" ry="2.5" stroke="#00d4ff" strokeWidth="1.4"/>
@@ -85,6 +100,7 @@ export function Sidebar() {
           <NavLink
             key={item.to}
             to={item.to}
+            onClick={onClose}
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs transition-all duration-150 ${isActive ? 'font-semibold' : ''}`
             }
@@ -163,6 +179,6 @@ export function Sidebar() {
           />
         </div>
       </div>
-    </motion.aside>
+    </aside>
   );
 }
