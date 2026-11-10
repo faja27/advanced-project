@@ -1,0 +1,902 @@
+{
+  "model": "MERDITH2021",
+  "generated_at": "2026-11-10T15:21:50Z",
+  "total_frames": 126,
+  "total_bytes": 8395451,
+  "intervals": [
+    {
+      "start_ma": 0,
+      "end_ma": 250,
+      "step_ma": 5
+    },
+    {
+      "start_ma": 260,
+      "end_ma": 1000,
+      "step_ma": 10
+    }
+  ],
+  "frames": [
+    {
+      "time_ma": 0,
+      "file": "0.json",
+      "size_bytes": 89590,
+      "n_features": 129,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 5,
+      "file": "5.json",
+      "size_bytes": 97419,
+      "n_features": 138,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 10,
+      "file": "10.json",
+      "size_bytes": 98021,
+      "n_features": 147,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 15,
+      "file": "15.json",
+      "size_bytes": 95661,
+      "n_features": 140,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 20,
+      "file": "20.json",
+      "size_bytes": 97496,
+      "n_features": 149,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 25,
+      "file": "25.json",
+      "size_bytes": 97707,
+      "n_features": 151,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 30,
+      "file": "30.json",
+      "size_bytes": 99314,
+      "n_features": 152,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 35,
+      "file": "35.json",
+      "size_bytes": 98172,
+      "n_features": 149,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 40,
+      "file": "40.json",
+      "size_bytes": 96765,
+      "n_features": 149,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 45,
+      "file": "45.json",
+      "size_bytes": 95770,
+      "n_features": 146,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 50,
+      "file": "50.json",
+      "size_bytes": 96541,
+      "n_features": 150,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 55,
+      "file": "55.json",
+      "size_bytes": 94272,
+      "n_features": 140,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 60,
+      "file": "60.json",
+      "size_bytes": 91971,
+      "n_features": 135,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 65,
+      "file": "65.json",
+      "size_bytes": 92168,
+      "n_features": 133,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 70,
+      "file": "70.json",
+      "size_bytes": 92166,
+      "n_features": 128,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 75,
+      "file": "75.json",
+      "size_bytes": 91503,
+      "n_features": 130,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 80,
+      "file": "80.json",
+      "size_bytes": 92627,
+      "n_features": 133,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 85,
+      "file": "85.json",
+      "size_bytes": 92918,
+      "n_features": 139,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 90,
+      "file": "90.json",
+      "size_bytes": 93648,
+      "n_features": 139,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 95,
+      "file": "95.json",
+      "size_bytes": 94246,
+      "n_features": 141,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 100,
+      "file": "100.json",
+      "size_bytes": 91651,
+      "n_features": 136,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 105,
+      "file": "105.json",
+      "size_bytes": 91538,
+      "n_features": 137,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 110,
+      "file": "110.json",
+      "size_bytes": 89521,
+      "n_features": 133,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 115,
+      "file": "115.json",
+      "size_bytes": 89892,
+      "n_features": 134,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 120,
+      "file": "120.json",
+      "size_bytes": 88702,
+      "n_features": 134,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 125,
+      "file": "125.json",
+      "size_bytes": 87914,
+      "n_features": 131,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 130,
+      "file": "130.json",
+      "size_bytes": 89587,
+      "n_features": 135,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 135,
+      "file": "135.json",
+      "size_bytes": 89347,
+      "n_features": 132,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 140,
+      "file": "140.json",
+      "size_bytes": 86361,
+      "n_features": 131,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 145,
+      "file": "145.json",
+      "size_bytes": 85684,
+      "n_features": 127,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 150,
+      "file": "150.json",
+      "size_bytes": 84913,
+      "n_features": 126,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 155,
+      "file": "155.json",
+      "size_bytes": 83897,
+      "n_features": 125,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 160,
+      "file": "160.json",
+      "size_bytes": 83204,
+      "n_features": 119,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 165,
+      "file": "165.json",
+      "size_bytes": 81774,
+      "n_features": 113,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 170,
+      "file": "170.json",
+      "size_bytes": 81712,
+      "n_features": 115,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 175,
+      "file": "175.json",
+      "size_bytes": 80282,
+      "n_features": 111,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 180,
+      "file": "180.json",
+      "size_bytes": 77912,
+      "n_features": 107,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 185,
+      "file": "185.json",
+      "size_bytes": 79437,
+      "n_features": 108,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 190,
+      "file": "190.json",
+      "size_bytes": 79683,
+      "n_features": 106,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 195,
+      "file": "195.json",
+      "size_bytes": 79057,
+      "n_features": 104,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 200,
+      "file": "200.json",
+      "size_bytes": 79045,
+      "n_features": 105,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 205,
+      "file": "205.json",
+      "size_bytes": 77988,
+      "n_features": 104,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 210,
+      "file": "210.json",
+      "size_bytes": 78384,
+      "n_features": 101,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 215,
+      "file": "215.json",
+      "size_bytes": 78473,
+      "n_features": 101,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 220,
+      "file": "220.json",
+      "size_bytes": 76122,
+      "n_features": 100,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 225,
+      "file": "225.json",
+      "size_bytes": 77529,
+      "n_features": 102,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 230,
+      "file": "230.json",
+      "size_bytes": 77698,
+      "n_features": 101,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 235,
+      "file": "235.json",
+      "size_bytes": 78837,
+      "n_features": 111,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 240,
+      "file": "240.json",
+      "size_bytes": 77766,
+      "n_features": 103,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 245,
+      "file": "245.json",
+      "size_bytes": 79792,
+      "n_features": 109,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 250,
+      "file": "250.json",
+      "size_bytes": 80615,
+      "n_features": 112,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 260,
+      "file": "260.json",
+      "size_bytes": 76641,
+      "n_features": 100,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 270,
+      "file": "270.json",
+      "size_bytes": 76649,
+      "n_features": 99,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 280,
+      "file": "280.json",
+      "size_bytes": 75373,
+      "n_features": 95,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 290,
+      "file": "290.json",
+      "size_bytes": 72665,
+      "n_features": 94,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 300,
+      "file": "300.json",
+      "size_bytes": 73760,
+      "n_features": 96,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 310,
+      "file": "310.json",
+      "size_bytes": 76380,
+      "n_features": 100,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 320,
+      "file": "320.json",
+      "size_bytes": 74106,
+      "n_features": 97,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 330,
+      "file": "330.json",
+      "size_bytes": 73993,
+      "n_features": 98,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 340,
+      "file": "340.json",
+      "size_bytes": 72755,
+      "n_features": 97,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 350,
+      "file": "350.json",
+      "size_bytes": 71818,
+      "n_features": 94,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 360,
+      "file": "360.json",
+      "size_bytes": 71527,
+      "n_features": 89,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 370,
+      "file": "370.json",
+      "size_bytes": 71050,
+      "n_features": 91,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 380,
+      "file": "380.json",
+      "size_bytes": 72785,
+      "n_features": 96,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 390,
+      "file": "390.json",
+      "size_bytes": 71089,
+      "n_features": 96,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 400,
+      "file": "400.json",
+      "size_bytes": 72156,
+      "n_features": 100,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 410,
+      "file": "410.json",
+      "size_bytes": 75659,
+      "n_features": 102,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 420,
+      "file": "420.json",
+      "size_bytes": 55100,
+      "n_features": 64,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 430,
+      "file": "430.json",
+      "size_bytes": 54215,
+      "n_features": 64,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 440,
+      "file": "440.json",
+      "size_bytes": 55019,
+      "n_features": 68,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 450,
+      "file": "450.json",
+      "size_bytes": 57564,
+      "n_features": 77,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 460,
+      "file": "460.json",
+      "size_bytes": 59558,
+      "n_features": 78,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 470,
+      "file": "470.json",
+      "size_bytes": 55387,
+      "n_features": 68,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 480,
+      "file": "480.json",
+      "size_bytes": 58437,
+      "n_features": 76,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 490,
+      "file": "490.json",
+      "size_bytes": 58579,
+      "n_features": 75,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 500,
+      "file": "500.json",
+      "size_bytes": 58345,
+      "n_features": 69,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 510,
+      "file": "510.json",
+      "size_bytes": 54924,
+      "n_features": 67,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 520,
+      "file": "520.json",
+      "size_bytes": 58837,
+      "n_features": 73,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 530,
+      "file": "530.json",
+      "size_bytes": 59029,
+      "n_features": 79,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 540,
+      "file": "540.json",
+      "size_bytes": 60065,
+      "n_features": 82,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 550,
+      "file": "550.json",
+      "size_bytes": 59008,
+      "n_features": 79,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 560,
+      "file": "560.json",
+      "size_bytes": 57146,
+      "n_features": 82,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 570,
+      "file": "570.json",
+      "size_bytes": 58826,
+      "n_features": 82,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 580,
+      "file": "580.json",
+      "size_bytes": 57945,
+      "n_features": 85,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 590,
+      "file": "590.json",
+      "size_bytes": 56840,
+      "n_features": 83,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 600,
+      "file": "600.json",
+      "size_bytes": 56080,
+      "n_features": 77,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 610,
+      "file": "610.json",
+      "size_bytes": 42005,
+      "n_features": 55,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 620,
+      "file": "620.json",
+      "size_bytes": 42570,
+      "n_features": 59,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 630,
+      "file": "630.json",
+      "size_bytes": 42322,
+      "n_features": 59,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 640,
+      "file": "640.json",
+      "size_bytes": 42592,
+      "n_features": 60,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 650,
+      "file": "650.json",
+      "size_bytes": 43232,
+      "n_features": 62,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 660,
+      "file": "660.json",
+      "size_bytes": 42424,
+      "n_features": 61,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 670,
+      "file": "670.json",
+      "size_bytes": 42316,
+      "n_features": 63,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 680,
+      "file": "680.json",
+      "size_bytes": 42417,
+      "n_features": 63,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 690,
+      "file": "690.json",
+      "size_bytes": 41895,
+      "n_features": 61,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 700,
+      "file": "700.json",
+      "size_bytes": 42075,
+      "n_features": 60,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 710,
+      "file": "710.json",
+      "size_bytes": 41927,
+      "n_features": 59,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 720,
+      "file": "720.json",
+      "size_bytes": 41123,
+      "n_features": 58,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 730,
+      "file": "730.json",
+      "size_bytes": 41703,
+      "n_features": 55,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 740,
+      "file": "740.json",
+      "size_bytes": 41323,
+      "n_features": 56,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 750,
+      "file": "750.json",
+      "size_bytes": 41827,
+      "n_features": 59,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 760,
+      "file": "760.json",
+      "size_bytes": 41602,
+      "n_features": 61,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 770,
+      "file": "770.json",
+      "size_bytes": 41957,
+      "n_features": 62,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 780,
+      "file": "780.json",
+      "size_bytes": 42853,
+      "n_features": 66,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 790,
+      "file": "790.json",
+      "size_bytes": 43739,
+      "n_features": 70,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 800,
+      "file": "800.json",
+      "size_bytes": 43756,
+      "n_features": 65,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 810,
+      "file": "810.json",
+      "size_bytes": 43660,
+      "n_features": 64,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 820,
+      "file": "820.json",
+      "size_bytes": 45245,
+      "n_features": 64,
+      "has_polar_cap": true
+    },
+    {
+      "time_ma": 830,
+      "file": "830.json",
+      "size_bytes": 44280,
+      "n_features": 64,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 840,
+      "file": "840.json",
+      "size_bytes": 44942,
+      "n_features": 71,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 850,
+      "file": "850.json",
+      "size_bytes": 44652,
+      "n_features": 65,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 860,
+      "file": "860.json",
+      "size_bytes": 42773,
+      "n_features": 62,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 870,
+      "file": "870.json",
+      "size_bytes": 43511,
+      "n_features": 59,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 880,
+      "file": "880.json",
+      "size_bytes": 42194,
+      "n_features": 60,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 890,
+      "file": "890.json",
+      "size_bytes": 41672,
+      "n_features": 60,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 900,
+      "file": "900.json",
+      "size_bytes": 40148,
+      "n_features": 57,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 910,
+      "file": "910.json",
+      "size_bytes": 39955,
+      "n_features": 59,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 920,
+      "file": "920.json",
+      "size_bytes": 39017,
+      "n_features": 59,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 930,
+      "file": "930.json",
+      "size_bytes": 38357,
+      "n_features": 59,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 940,
+      "file": "940.json",
+      "size_bytes": 38205,
+      "n_features": 58,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 950,
+      "file": "950.json",
+      "size_bytes": 38247,
+      "n_features": 56,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 960,
+      "file": "960.json",
+      "size_bytes": 38274,
+      "n_features": 56,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 970,
+      "file": "970.json",
+      "size_bytes": 37734,
+      "n_features": 54,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 980,
+      "file": "980.json",
+      "size_bytes": 38587,
+      "n_features": 57,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 990,
+      "file": "990.json",
+      "size_bytes": 38573,
+      "n_features": 56,
+      "has_polar_cap": false
+    },
+    {
+      "time_ma": 1000,
+      "file": "1000.json",
+      "size_bytes": 38165,
+      "n_features": 56,
+      "has_polar_cap": false
+    }
+  ]
+}
