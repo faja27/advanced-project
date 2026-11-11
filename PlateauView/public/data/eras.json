@@ -1,0 +1,505 @@
+{
+  "source": "ICS International Chronostratigraphic Chart v2026/06 (stratigraphy.org/chart). Warna dari CCGM (Commission for the Geological Map of the World) yang diterima ICS sebagai standar, diakses via Wikipedia Template:Period_color (https://en.wikipedia.org/wiki/Template:Period_color, 2026-11-11).",
+  "source_url": "https://stratigraphy.org/chart",
+  "generated": "2026-11-11",
+  "time_convention": "start_ma dan end_ma dalam satuan Ma (juta tahun lalu). Nilai positif = masa lalu; nilai negatif = masa depan (Ma dari sekarang). start_ma selalu merupakan batas LEBIH TUA, end_ma batas LEBIH MUDA.",
+  "note": "verified:true = waktu dan warna dikonfirmasi dari sumber resmi yang tercantum. verified:false = belum dapat dikonfirmasi atau unit bersifat informal.",
+  "eons": [
+    {
+      "id": "hadean",
+      "name_id": "Hadean",
+      "name_en": "Hadean",
+      "level": "eon",
+      "start_ma": 4600,
+      "end_ma": 4000,
+      "color": "#AE027E",
+      "verified": false,
+      "note": "Unit informal ICS — batas bawah 4600 Ma tidak resmi (ICS tidak menetapkan batas pasti awal Hadean). Warna #AE027E = rgb(174,2,126) dari CCGM (Wikipedia Template:Period_color), namun karena unit informal, verified tetap false. Batas atas 4000 Ma (awal Arkean) adalah resmi ICS.",
+      "eras": []
+    },
+    {
+      "id": "archean",
+      "name_id": "Arkean",
+      "name_en": "Archean",
+      "level": "eon",
+      "start_ma": 4000,
+      "end_ma": 2500,
+      "color": "#F0047F",
+      "verified": true,
+      "source": "Waktu: ICS v2026/06 (stratigraphy.org/chart). Warna rgb(240,4,127): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+      "note": "Era Arkean tidak memiliki Periode resmi di ICS 2026.",
+      "eras": [
+        {
+          "id": "eoarchean",
+          "name_id": "Eoarkean",
+          "name_en": "Eoarchean",
+          "level": "era",
+          "start_ma": 4000,
+          "end_ma": 3600,
+          "color": "#DA037F",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06. Warna rgb(218,3,127): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": []
+        },
+        {
+          "id": "paleoarchean",
+          "name_id": "Paleoarkean",
+          "name_en": "Paleoarchean",
+          "level": "era",
+          "start_ma": 3600,
+          "end_ma": 3200,
+          "color": "#F4449F",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06. Warna rgb(244,68,159): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": []
+        },
+        {
+          "id": "mesoarchean",
+          "name_id": "Mesoarkean",
+          "name_en": "Mesoarchean",
+          "level": "era",
+          "start_ma": 3200,
+          "end_ma": 2800,
+          "color": "#F768A9",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06. Warna rgb(247,104,169): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": []
+        },
+        {
+          "id": "neoarchean",
+          "name_id": "Neoarkean",
+          "name_en": "Neoarchean",
+          "level": "era",
+          "start_ma": 2800,
+          "end_ma": 2500,
+          "color": "#F99BC1",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06. Warna rgb(249,155,193): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": []
+        }
+      ]
+    },
+    {
+      "id": "proterozoic",
+      "name_id": "Proterozoikum",
+      "name_en": "Proterozoic",
+      "level": "eon",
+      "start_ma": 2500,
+      "end_ma": 538.8,
+      "color": "#F73563",
+      "verified": true,
+      "source": "Waktu: ICS v2026/06; batas bawah 538.8 Ma diperbarui dari 541.0 Ma di ICS 2022. Warna rgb(247,53,99): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+      "eras": [
+        {
+          "id": "paleoproterozoic",
+          "name_id": "Paleoproterozoikum",
+          "name_en": "Paleoproterozoic",
+          "level": "era",
+          "start_ma": 2500,
+          "end_ma": 1600,
+          "color": "#F74370",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06. Warna rgb(247,67,112): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": [
+            {
+              "id": "siderian",
+              "name_id": "Siderian",
+              "name_en": "Siderian",
+              "level": "period",
+              "start_ma": 2500,
+              "end_ma": 2300,
+              "color": "#F74F7C",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(247,79,124): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "rhyacian",
+              "name_id": "Ryakian",
+              "name_en": "Rhyacian",
+              "level": "period",
+              "start_ma": 2300,
+              "end_ma": 2050,
+              "color": "#F75B89",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(247,91,137): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "orosirian",
+              "name_id": "Orosirian",
+              "name_en": "Orosirian",
+              "level": "period",
+              "start_ma": 2050,
+              "end_ma": 1800,
+              "color": "#F76898",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(247,104,152): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "statherian",
+              "name_id": "Statherian",
+              "name_en": "Statherian",
+              "level": "period",
+              "start_ma": 1800,
+              "end_ma": 1600,
+              "color": "#F875A7",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(248,117,167): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            }
+          ]
+        },
+        {
+          "id": "mesoproterozoic",
+          "name_id": "Mesoproterozoikum",
+          "name_en": "Mesoproterozoic",
+          "level": "era",
+          "start_ma": 1600,
+          "end_ma": 1000,
+          "color": "#FDB462",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06. Warna rgb(253,180,98): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": [
+            {
+              "id": "calymmian",
+              "name_id": "Kalimian",
+              "name_en": "Calymmian",
+              "level": "period",
+              "start_ma": 1600,
+              "end_ma": 1400,
+              "color": "#FDC07A",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(253,192,122): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "ectasian",
+              "name_id": "Ektasian",
+              "name_en": "Ectasian",
+              "level": "period",
+              "start_ma": 1400,
+              "end_ma": 1200,
+              "color": "#FDCC8A",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(253,204,138): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "stenian",
+              "name_id": "Stenian",
+              "name_en": "Stenian",
+              "level": "period",
+              "start_ma": 1200,
+              "end_ma": 1000,
+              "color": "#FED99A",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(254,217,154): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            }
+          ]
+        },
+        {
+          "id": "neoproterozoic",
+          "name_id": "Neoproterozoikum",
+          "name_en": "Neoproterozoic",
+          "level": "era",
+          "start_ma": 1000,
+          "end_ma": 538.8,
+          "color": "#FEB342",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06. Warna rgb(254,179,66): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": [
+            {
+              "id": "tonian",
+              "name_id": "Tonian",
+              "name_en": "Tonian",
+              "level": "period",
+              "start_ma": 1000,
+              "end_ma": 720,
+              "color": "#FEBF4E",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(254,191,78): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "cryogenian",
+              "name_id": "Kriogenian",
+              "name_en": "Cryogenian",
+              "level": "period",
+              "start_ma": 720,
+              "end_ma": 635,
+              "color": "#FECC5C",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(254,204,92): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "ediacaran",
+              "name_id": "Ediakaran",
+              "name_en": "Ediacaran",
+              "level": "period",
+              "start_ma": 635,
+              "end_ma": 538.8,
+              "color": "#FED96A",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(254,217,106): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phanerozoic",
+      "name_id": "Fanerozoikum",
+      "name_en": "Phanerozoic",
+      "level": "eon",
+      "start_ma": 538.8,
+      "end_ma": 0,
+      "color": "#9AD9DD",
+      "verified": true,
+      "source": "Waktu: ICS v2026/06. Warna rgb(154,217,221): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+      "note": "Fanerozoikum biasanya hanya ditampilkan melalui era/periodenya di chart ICS; warna eon ini dari CCGM.",
+      "eras": [
+        {
+          "id": "paleozoic",
+          "name_id": "Paleozoikum",
+          "name_en": "Paleozoic",
+          "level": "era",
+          "start_ma": 538.8,
+          "end_ma": 251.9,
+          "color": "#99C08D",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06; Permian/Triassic boundary 251.902 Ma (dibulatkan 251.9). Warna rgb(153,192,141): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": [
+            {
+              "id": "cambrian",
+              "name_id": "Kambrium",
+              "name_en": "Cambrian",
+              "level": "period",
+              "start_ma": 538.8,
+              "end_ma": 485.4,
+              "color": "#7FA056",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06; batas bawah 538.8 Ma diperbarui dari 541.0 Ma di ICS 2022. Warna rgb(127,160,86): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "ordovician",
+              "name_id": "Ordovisium",
+              "name_en": "Ordovician",
+              "level": "period",
+              "start_ma": 485.4,
+              "end_ma": 443.8,
+              "color": "#009270",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(0,146,112): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "silurian",
+              "name_id": "Silur",
+              "name_en": "Silurian",
+              "level": "period",
+              "start_ma": 443.8,
+              "end_ma": 419.2,
+              "color": "#B3E1B6",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(179,225,182): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "devonian",
+              "name_id": "Devon",
+              "name_en": "Devonian",
+              "level": "period",
+              "start_ma": 419.2,
+              "end_ma": 358.9,
+              "color": "#CB8C37",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(203,140,55): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "carboniferous",
+              "name_id": "Karbon",
+              "name_en": "Carboniferous",
+              "level": "period",
+              "start_ma": 358.9,
+              "end_ma": 298.9,
+              "color": "#67A599",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(103,165,153): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+              "note": "ICS membagi ini menjadi Mississipian (358.9–323.2 Ma) dan Pennsylvanian (323.2–298.9 Ma); warna ini adalah warna agregat Karbon."
+            },
+            {
+              "id": "permian",
+              "name_id": "Perm",
+              "name_en": "Permian",
+              "level": "period",
+              "start_ma": 298.9,
+              "end_ma": 251.9,
+              "color": "#F04028",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06; Perm/Trias boundary 251.902 Ma (dibulatkan 251.9; ICS 2026/06 mengubah batas stage Wuchiapingian menjadi 259.857 Ma, tidak mempengaruhi batas periode). Warna rgb(240,64,40): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            }
+          ]
+        },
+        {
+          "id": "mesozoic",
+          "name_id": "Mesozoikum",
+          "name_en": "Mesozoic",
+          "level": "era",
+          "start_ma": 251.9,
+          "end_ma": 66,
+          "color": "#67C5CA",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06. Warna rgb(103,197,202): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": [
+            {
+              "id": "triassic",
+              "name_id": "Trias",
+              "name_en": "Triassic",
+              "level": "period",
+              "start_ma": 251.9,
+              "end_ma": 201.4,
+              "color": "#812B92",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06; batas bawah 251.902 Ma (dibulatkan 251.9); ICS 2026/06 mengubah batas stage Olenekian ke 250.8 Ma dan Anisian ke 247.0 Ma, tidak mempengaruhi batas periode. Warna rgb(129,43,146): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "jurassic",
+              "name_id": "Jura",
+              "name_en": "Jurassic",
+              "level": "period",
+              "start_ma": 201.4,
+              "end_ma": 145,
+              "color": "#34B2C9",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06; batas Jura/Kapur 145.0 Ma (tidak memiliki GSSP resmi; ICS menggunakan 145.0 Ma sebagai nilai konvensional). Warna rgb(52,178,201): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "cretaceous",
+              "name_id": "Kapur",
+              "name_en": "Cretaceous",
+              "level": "period",
+              "start_ma": 145,
+              "end_ma": 66,
+              "color": "#7FC64E",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(127,198,78): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            }
+          ]
+        },
+        {
+          "id": "cenozoic",
+          "name_id": "Kenozoikum",
+          "name_en": "Cenozoic",
+          "level": "era",
+          "start_ma": 66,
+          "end_ma": 0,
+          "color": "#F2F91D",
+          "verified": true,
+          "source": "Waktu: ICS v2026/06. Warna rgb(242,249,29): CCGM via Wikipedia Template:Period_color, 2026-11-11.",
+          "periods": [
+            {
+              "id": "paleogene",
+              "name_id": "Paleogen",
+              "name_en": "Paleogene",
+              "level": "period",
+              "start_ma": 66,
+              "end_ma": 23.03,
+              "color": "#FD9A52",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(253,154,82): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "neogene",
+              "name_id": "Neogen",
+              "name_en": "Neogene",
+              "level": "period",
+              "start_ma": 23.03,
+              "end_ma": 2.58,
+              "color": "#FFE619",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(255,230,25): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            },
+            {
+              "id": "quaternary",
+              "name_id": "Kuarter",
+              "name_en": "Quaternary",
+              "level": "period",
+              "start_ma": 2.58,
+              "end_ma": 0,
+              "color": "#F9F97F",
+              "verified": true,
+              "source": "Waktu: ICS v2026/06. Warna rgb(249,249,127): CCGM via Wikipedia Template:Period_color, 2026-11-11."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "supercontinents": [
+    {
+      "id": "rodinia",
+      "name_id": "Rodinia",
+      "name_en": "Rodinia",
+      "start_ma": 1100,
+      "end_ma": 750,
+      "color": "#B05FA0",
+      "projection": false,
+      "approximate": true,
+      "verified": false,
+      "note": "Superbenua Neoproterozoikum. Terbentuk ~1100 Ma, mulai terpecah ~750 Ma. Semua rentang perkiraan; estimasi bervariasi antar publikasi. Superbenua tidak diverifikasi ke ICS."
+    },
+    {
+      "id": "pannotia",
+      "name_id": "Pannotia",
+      "name_en": "Pannotia",
+      "start_ma": 600,
+      "end_ma": 540,
+      "color": "#A05090",
+      "projection": false,
+      "approximate": true,
+      "verified": false,
+      "note": "Superbenua berumur pendek di akhir Neoproterozoikum–awal Kambrium. Keberadaannya diperdebatkan di kalangan ahli geologi. Superbenua tidak diverifikasi ke ICS."
+    },
+    {
+      "id": "pangaea",
+      "name_id": "Pangaea",
+      "name_en": "Pangaea",
+      "start_ma": 335,
+      "end_ma": 175,
+      "color": "#C0785A",
+      "projection": false,
+      "approximate": true,
+      "verified": false,
+      "note": "Terbentuk penuh ~335 Ma; rifting dimulai ~200 Ma, digunakan ~175 Ma sebagai batas awal pemisahan utama. Superbenua tidak diverifikasi ke ICS."
+    },
+    {
+      "id": "pangaea_proxima",
+      "name_id": "Pangaea Proxima",
+      "name_en": "Pangaea Proxima",
+      "start_ma": -250,
+      "end_ma": null,
+      "color": "#8080C0",
+      "projection": true,
+      "approximate": true,
+      "verified": false,
+      "note": "Skenario Scotese (2003): Atlantik menutup, benua menyatu kembali ±250 Ma ke depan. Nilai start_ma negatif = masa depan. Superbenua tidak diverifikasi ke ICS."
+    },
+    {
+      "id": "novopangaea",
+      "name_id": "Novopangaea",
+      "name_en": "Novopangaea",
+      "start_ma": -250,
+      "end_ma": null,
+      "color": "#7090C0",
+      "projection": true,
+      "approximate": true,
+      "verified": false,
+      "note": "Skenario alternatif (Nield, 2007): Pasifik menutup, benua menyatu di sekitar Pasifik ±250 Ma ke depan. Superbenua tidak diverifikasi ke ICS."
+    },
+    {
+      "id": "amasia",
+      "name_id": "Amasia",
+      "name_en": "Amasia",
+      "start_ma": -200,
+      "end_ma": null,
+      "color": "#6080B0",
+      "projection": true,
+      "approximate": true,
+      "verified": false,
+      "note": "Skenario Mitchell dkk. (2012): Arktik menutup, Amerika Utara–Asia menyatu di sekitar kutub utara ±200 Ma ke depan. Superbenua tidak diverifikasi ke ICS."
+    }
+  ]
+}
