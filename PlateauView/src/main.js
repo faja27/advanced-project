@@ -1,3 +1,9 @@
-import { initGlobe } from './globe.js';
+import { initGlobe, setFrame } from './globe.js';
 
-const globe = initGlobe('globe-container');
+const params = new URLSearchParams(window.location.search);
+const initialTime = Number(params.get('t') ?? 0);
+
+(async () => {
+  await initGlobe('globe-container');
+  await setFrame(isFinite(initialTime) ? initialTime : 0);
+})();
