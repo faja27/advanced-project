@@ -1,4 +1,4 @@
-import { initGlobe, setFrame } from './globe.js';
+import { initGlobe, setFrame, startBackgroundPreload } from './globe.js';
 import { initTimeline } from './timeline.js';
 import { initEraPanel } from './era-panel.js';
 import { initPlayback } from './playback.js';
@@ -10,7 +10,8 @@ const t           = isFinite(initialTime) ? initialTime : 0;
 (async () => {
   await initGlobe('globe-container');
   await setFrame(t);
-  await initEraPanel(t);   // register listener before timeline dispatches
-  await initTimeline(t);   // sync() dispatches initial 'plateauview:timechange'
-  initPlayback();           // prepend controls row to #timeline-bar (synchronous)
+  startBackgroundPreload();    // first frame is on screen → load the rest quietly
+  await initEraPanel(t);
+  await initTimeline(t);
+  initPlayback();
 })();
