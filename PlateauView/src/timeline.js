@@ -160,12 +160,13 @@ export async function initTimeline(initialMa = 0) {
   bar.appendChild(wrap);
   document.body.appendChild(bar);
 
-  // keep label text + position in sync with slider value
+  // keep label text + position in sync with slider value; notify era panel
   function sync() {
     const val = Number(slider.value);
     const ma  = sliderToMa(val / STEPS);
     lbl.textContent = formatMa(ma);
     lbl.style.left  = labelLeft(val);
+    window.dispatchEvent(new CustomEvent('plateauview:timechange', { detail: { ma } }));
   }
   sync();
 

@@ -75,6 +75,100 @@ html, body {
   display: block;
 }
 
+/* ── Era panel (top-left) ──────────────────────────────────────────────────── */
+
+#era-panel {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  min-width: 240px;
+  max-width: 400px;
+  background: rgba(0, 8, 20, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-left: 5px solid var(--accent, #666);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px 16px;
+  z-index: 50;
+  color: #fff;
+  pointer-events: none;
+}
+
+/* ancestor chain (Eon, Era shown above the main unit name) */
+.ep-parents {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.52);
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+/* main (deepest active unit): Period, or Era if no period, or Eon */
+.ep-main {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  line-height: 1.15;
+}
+
+.ep-dot {
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.ep-main-text {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* supercontinents */
+.ep-scs {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ep-sc {
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.45;
+  margin-bottom: 2px;
+}
+
+/* segment badges */
+.ep-badge {
+  display: inline-block;
+  margin-top: 11px;
+  padding: 3px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.ep-badge-a {
+  background: rgba(255, 185, 55, 0.18);
+  color: #ffd07a;
+  border: 1px solid rgba(255, 185, 55, 0.4);
+}
+
+.ep-badge-c {
+  background: rgba(110, 110, 230, 0.2);
+  color: #b0b8ff;
+  border: 1px solid rgba(110, 110, 230, 0.45);
+}
+
 /* ── Timeline bar ─────────────────────────────────────────────────────────── */
 
 #timeline-bar {
