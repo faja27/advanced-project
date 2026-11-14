@@ -60,6 +60,11 @@ function fmtSc(sc) {
 function render(panel, data, ma) {
   const seg = segmentOf(ma);
   const { eon, era, period } = findActive(data.eons, ma);
+  const activeSCs = findSupercontinents(data.supercontinents, ma);
+
+  const key = `${eon?.id}|${era?.id}|${period?.id}|${activeSCs.map(s => s.id).join(',')}|${seg}`;
+  if (panel._renderKey === key) return;
+  panel._renderKey = key;
 
   // Build hierarchy levels deepest-first so the last item is the most specific
   const levels = [];
@@ -70,8 +75,6 @@ function render(panel, data, ma) {
   const active      = period || era || eon;
   const accentColor = active ? active.color : '#3a3870';
   panel.style.setProperty('--accent', accentColor);
-
-  const activeSCs = findSupercontinents(data.supercontinents, ma);
 
   let html = '';
 

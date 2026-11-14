@@ -8,9 +8,11 @@ const IN_FLIGHT   = new Map();  // file → Promise<GeoJSON>  (coalesces concurr
 // ── Globe state ───────────────────────────────────────────────────────────────
 let globeInstance   = null;
 let manifestData    = null;
-let frameGen        = 0;     // latest-wins counter
-let lastFrameIdx    = -1;    // index of last rendered frame (direction detection)
+let frameGen        = 0;      // latest-wins counter
+let lastFrameIdx    = -1;     // index of last requested frame (direction detection)
+let displayedFile   = null;   // file currently rendered on globe (skip redundant updates)
 let bgPreloadActive = false;
+let bgPreloadIdx    = 0;      // shared work-queue index for parallel bg workers
 
 const PRELOAD_AHEAD = 6;     // frames to fetch ahead in the current playback direction
 
@@ -102,22 +104,29 @@ function preloadAhead(currentIdx, count, direction) {
 function yieldToMain() {
   return new Promise(resolve => {
     if (typeof requestIdleCallback === 'function') {
-      requestIdleCallback(resolve, { timeout: 500 });
+      requestIdleCallback(resolve, { timeout: 50 });
     } else {
-      setTimeout(resolve, 30);
+      setTimeout(resolve, 50);
     }
   });
 }
 
-async function bgPreloadWorker() {
-  if (!manifestData) return;
-  for (const frame of manifestData.frames) {
-    if (!bgPreloadActive) return;
+async function bgWorker() {
+  while (bgPreloadActive && manifestData) {
+    const idx = bgPreloadIdx++;
+    if (idx >= manifestData.frames.length) break;
+    const frame = manifestData.frames[idx];
     if (!FRAME_CACHE.has(frame.file)) {
       await fetchFrame(frame).catch(() => {});
-      await yieldToMain(); // yield only after real network work
     }
+    await yieldToMain();
   }
+}
+
+async function bgPreloadWorker() {
+  if (!manifestData) return;
+  bgPreloadIdx = 0;
+  await Promise.all([bgWorker(), bgWorker(), bgWorker()]);
   bgPreloadActive = false;
   console.info('[PlateauView] Background preload selesai.', getCacheStats());
 }
@@ -174,16 +183,18 @@ export async function setFrame(timeMa) {
   lastFrameIdx    = frameIdx;
   preloadAhead(frameIdx, PRELOAD_AHEAD, direction);
 
-  // If the frame is in cache (or already in-flight and will finish imminently),
-  // skip the spinner to avoid flicker during smooth animation.
+  // Increment gen first so any stale in-flight fetch for this same file is discarded.
+  const gen = ++frameGen;
+  if (frame.file === displayedFile) return;  // already on screen — nothing to do
+
   const alreadyReady = FRAME_CACHE.has(frame.file);
-  const gen          = ++frameGen;
   if (!alreadyReady) setLoading(true);
 
   try {
     const geojson = await fetchFrame(frame);
     if (gen !== frameGen) return;             // superseded — newer request won
     globeInstance.polygonsData(geojson.features);
+    displayedFile = frame.file;
   } catch (err) {
     if (gen === frameGen) showError(err.message);
   } finally {
@@ -204,7 +215,8 @@ export async function initGlobe(containerId) {
     .polygonCapColor(() => '#c8a96e')
     .polygonSideColor(() => 'rgba(0,0,0,0)')
     .polygonStrokeColor(() => null)
-    .polygonAltitude(0.004);
+    .polygonAltitude(0.004)
+    .polygonsTransitionDuration(0);
 
   const mat = globe.globeMaterial();
   mat.color.set(0x002d50);
