@@ -2,7 +2,8 @@ import Globe from 'globe.gl';
 
 const FRAME_CACHE = new Map();
 let globeInstance = null;
-let manifestData = null;
+let manifestData  = null;
+let frameGen      = 0;  // latest-wins: stale fetches check this
 
 // --- UI helpers ---
 
@@ -58,14 +59,16 @@ export async function setFrame(timeMa) {
   if (!globeInstance || !manifestData) return;
 
   const frame = findNearestFrame(timeMa);
+  const gen   = ++frameGen;
   setLoading(true);
   try {
     const geojson = await fetchFrame(frame);
+    if (gen !== frameGen) return;             // newer request supersedes this one
     globeInstance.polygonsData(geojson.features);
   } catch (err) {
-    showError(err.message);
+    if (gen === frameGen) showError(err.message);
   } finally {
-    setLoading(false);
+    if (gen === frameGen) setLoading(false);  // only the latest hides the spinner
   }
 }
 
