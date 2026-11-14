@@ -57,7 +57,7 @@ html, body {
 #error-message {
   display: none;
   position: fixed;
-  bottom: 160px;
+  bottom: 200px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(160, 30, 30, 0.85);
@@ -189,13 +189,13 @@ html, body {
 #timeline-track-wrapper {
   position: relative;
   height: 64px;
-  margin-top: 34px; /* room for the time label above */
+  margin-top: 42px; /* room for the time label above (more when controls row is present) */
 }
 
 /* ── Time label above thumb ── */
 #timeline-time-label {
   position: absolute;
-  top: -30px;
+  top: -34px;
   /* left set dynamically by JS */
   transform: translateX(-50%);
   font-size: 20px;
@@ -348,3 +348,92 @@ html, body {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4), 0 2px 10px rgba(0, 0, 0, 0.7);
   cursor: grab;
 }
+
+/* ── Playback controls ─────────────────────────────────────────────────────── */
+
+#pb-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* base button */
+.pb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-width: 38px;
+  padding: 0 10px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.pb-btn:hover {
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.40);
+}
+
+/* play/pause button — slightly larger */
+.pb-btn-play {
+  font-size: 20px;
+  min-width: 46px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* playing state highlight */
+.pb-btn-playing {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* text buttons (Masa kini) */
+.pb-btn-text {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* speed selector — segmented control */
+#pb-speeds {
+  display: flex;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pb-speed {
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.50);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 14px;
+  height: 36px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.pb-speed:last-child { border-right: none; }
+
+.pb-speed:hover {
+  background: rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pb-speed-active {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.pb-spacer { flex: 1; }

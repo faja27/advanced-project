@@ -1,5 +1,6 @@
 import { sliderToMa, maToSlider, formatMa, nearestAvailableMa, SEG, P } from './timescale.js';
 import { setFrame } from './globe.js';
+import { pausePlayback } from './playback.js';
 
 const STEPS   = 10000;
 const SMALL   = 50;   // keyboard small step (~7 Ma in segment B)
@@ -170,15 +171,21 @@ export async function initTimeline(initialMa = 0) {
   }
   sync();
 
-  // slider drag
+  // user drags the slider → pause animation
   slider.addEventListener('input', () => {
+    pausePlayback();
     sync();
     scheduleFrame(sliderToMa(Number(slider.value) / STEPS));
   });
 
-  // keyboard: left/right arrow (+ Shift for large step)
+  // programmatic seek from playback.js → update UI without pausing
+  slider.addEventListener('plateauview:seekto', e => {
+    sync();
+    scheduleFrame(sliderToMa(e.detail.value / STEPS));
+  });
+
+  // keyboard: left/right arrow (+ Shift for large step) → pause animation
   document.addEventListener('keydown', e => {
-    // ignore if typing in a text field
     if (e.target instanceof HTMLInputElement && e.target.type !== 'range') return;
     if (e.target instanceof HTMLTextAreaElement) return;
 
@@ -188,6 +195,7 @@ export async function initTimeline(initialMa = 0) {
     else return;
 
     e.preventDefault();
+    pausePlayback();
     slider.value = String(Math.max(0, Math.min(STEPS, +slider.value + delta)));
     sync();
     scheduleFrame(sliderToMa(+slider.value / STEPS));
