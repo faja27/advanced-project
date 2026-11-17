@@ -1,4 +1,5 @@
-import { maToSlider, P } from './timescale.js';
+import { maToSlider, sliderToMa, P } from './timescale.js';
+import { setCrossfadeFrame, notifyPlayStart } from './globe.js';
 
 // ── Speed ─────────────────────────────────────────────────────────────────────
 // At 1×, traversing segment B (p: 0.15 → 0.85, width 0.70) takes exactly 60 s.
@@ -41,8 +42,9 @@ function tick(ts) {
     if (intVal !== +slider.value) {
       slider.value = String(intVal);
       // Custom event → timeline.js syncs label + era panel WITHOUT pausing.
+      // playing: true signals timeline.js to use crossfade mode.
       slider.dispatchEvent(new CustomEvent('plateauview:seekto', {
-        detail: { value: intVal },
+        detail: { value: intVal, playing: true },
       }));
     }
 
@@ -58,13 +60,20 @@ function tick(ts) {
 
 // ── Public API ────────────────────────────────────────────────────────────────
 
-/** Stop playback (safe to call when already stopped). */
+/** Stop playback and snap globe to nearest frame. Safe to call when stopped. */
 export function pausePlayback() {
   if (!playing) return;
   playing = false;
   lastTs  = null;
   if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
   updateBtn();
+
+  // Snap top globe opacity to 0 immediately (non-blocking)
+  const slider = getSlider();
+  if (slider) {
+    const ma = sliderToMa(+slider.value / STEPS);
+    setCrossfadeFrame(ma, false).catch(() => {});
+  }
 }
 
 function play() {
@@ -84,6 +93,7 @@ function play() {
   playing = true;
   lastTs  = null;
   updateBtn();
+  notifyPlayStart();   // reset FPS monitor window for auto-fallback
   rafId = requestAnimationFrame(tick);
 }
 

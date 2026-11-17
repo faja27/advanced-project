@@ -1,5 +1,5 @@
-import { sliderToMa, maToSlider, formatMa, nearestAvailableMa, SEG, P } from './timescale.js';
-import { setFrame } from './globe.js';
+import { sliderToMa, maToSlider, formatMa, SEG, P } from './timescale.js';
+import { setCrossfadeFrame } from './globe.js';
 import { pausePlayback } from './playback.js';
 
 const STEPS   = 10000;
@@ -7,8 +7,9 @@ const SMALL   = 50;   // keyboard small step (~7 Ma in segment B)
 const LARGE   = 500;  // keyboard large step (Shift+arrow, ~70 Ma in seg B)
 const THUMB_R = 12;   // px — must match CSS thumb radius (24px diameter / 2)
 
-let pendingMa = null;
-let rafHandle = null;
+let pendingMa        = null;
+let pendingIsPlaying = false;
+let rafHandle        = null;
 
 // ── Era color band ────────────────────────────────────────────────────────────
 
@@ -75,18 +76,27 @@ function labelLeft(val) {
   return `calc(${pct}% + ${THUMB_R * (1 - 2 * pct / 100)}px)`;
 }
 
-// ── Frame dispatch: rAF + latest-wins (generation in globe.js) ────────────────
+// ── Frame dispatch: rAF + latest-wins ────────────────────────────────────────
 
-function scheduleFrame(ma) {
-  pendingMa = ma;
+/**
+ * Schedule a crossfade/snap frame update.
+ * @param {number}  ma        - continuous time value in Ma
+ * @param {boolean} isPlaying - true while playback is active (crossfade mode)
+ */
+function scheduleFrame(ma, isPlaying = false) {
+  pendingMa        = ma;
+  pendingIsPlaying = isPlaying;
   if (!rafHandle) rafHandle = requestAnimationFrame(dispatchFrame);
 }
 
 async function dispatchFrame() {
   rafHandle = null;
-  const ma = pendingMa;
-  pendingMa = null;
-  await setFrame(nearestAvailableMa(ma));
+  const ma        = pendingMa;
+  const isPlaying = pendingIsPlaying;
+  pendingMa        = null;
+  pendingIsPlaying = false;
+  // Pass raw ma to setCrossfadeFrame; it handles clamping for Seg A/C internally.
+  await setCrossfadeFrame(ma, isPlaying);
 }
 
 // ── Build DOM ─────────────────────────────────────────────────────────────────
@@ -171,17 +181,17 @@ export async function initTimeline(initialMa = 0) {
   }
   sync();
 
-  // user drags the slider → pause animation
+  // user drags the slider → pause animation, snap to nearest frame
   slider.addEventListener('input', () => {
     pausePlayback();
     sync();
-    scheduleFrame(sliderToMa(Number(slider.value) / STEPS));
+    scheduleFrame(sliderToMa(Number(slider.value) / STEPS), false);
   });
 
-  // programmatic seek from playback.js → update UI without pausing
+  // programmatic seek from playback.js tick → update UI without pausing
   slider.addEventListener('plateauview:seekto', e => {
     sync();
-    scheduleFrame(sliderToMa(e.detail.value / STEPS));
+    scheduleFrame(sliderToMa(e.detail.value / STEPS), e.detail.playing ?? false);
   });
 
   // keyboard: left/right arrow (+ Shift for large step) → pause animation
@@ -198,6 +208,6 @@ export async function initTimeline(initialMa = 0) {
     pausePlayback();
     slider.value = String(Math.max(0, Math.min(STEPS, +slider.value + delta)));
     sync();
-    scheduleFrame(sliderToMa(+slider.value / STEPS));
+    scheduleFrame(sliderToMa(+slider.value / STEPS), false);
   });
 }
