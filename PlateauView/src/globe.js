@@ -10,8 +10,8 @@ let globeBottom = null;   // interactive, always bottom layer
 let globeTop    = null;   // overlay, pointer-events none
 let topWrapper  = null;   // div wrapper for globeTop; opacity knob
 
-// ── Crossfade flag (default true; set false to revert to single-globe mode) ──
-export let crossfadeEnabled = true;
+// ── Crossfade flag (?crossfade=0 disables from load) ─────────────────────────
+export let crossfadeEnabled = new URLSearchParams(location.search).get('crossfade') !== '0';
 
 // ── Manifest & frame state ────────────────────────────────────────────────────
 let manifestData        = null;
@@ -31,9 +31,9 @@ let debugEl = null;
 // FPS: ring of rAF timestamps over a 2-second rolling window
 const fpsRing = [];
 
-// polygonsData rebuild timing (ms per call)
-const rebuildTimes = [];
-const REBUILD_MAX  = 60;
+// Inter-rAF delta ring: {ts, dt} pairs for worst-frame and slow-frame stats
+const deltaRing = [];
+let prevCameraTs = null;
 
 // Auto-fallback: rAF timestamps collected between 1 s and 4 s after play start
 let playStartTs  = null;
@@ -206,11 +206,7 @@ export function getCacheStats() {
 // ── Polygon update with rebuild timing ───────────────────────────────────────
 
 function applyPolygons(globeInstance, geojson) {
-  const t0 = performance.now();
   globeInstance.polygonsData(geojson.features);
-  const dt = performance.now() - t0;
-  rebuildTimes.push(dt);
-  if (rebuildTimes.length > REBUILD_MAX) rebuildTimes.shift();
 }
 
 // ── Camera sync & debug loop ──────────────────────────────────────────────────
@@ -237,6 +233,14 @@ function cameraSyncLoop(ts) {
   fpsRing.push(ts);
   const fpsCutoff = ts - 2000;
   while (fpsRing.length > 1 && fpsRing[0] < fpsCutoff) fpsRing.shift();
+
+  // ── Inter-rAF delta ring (2-second window) ────────────────────────────────
+  if (prevCameraTs !== null) {
+    const dt = ts - prevCameraTs;
+    deltaRing.push({ ts, dt });
+    while (deltaRing.length > 0 && deltaRing[0].ts < fpsCutoff) deltaRing.shift();
+  }
+  prevCameraTs = ts;
 
   // ── Auto-fallback: measure rAF timestamps between 1 s and 4 s after play ──
   if (crossfadeEnabled && !fallbackDone && playStartTs !== null) {
@@ -276,15 +280,14 @@ function cameraSyncLoop(ts) {
     const fps = fpsRing.length >= 2
       ? ((fpsRing.length - 1) / ((fpsRing[fpsRing.length - 1] - fpsRing[0]) / 1000)).toFixed(1)
       : '—';
-    const avg = rebuildTimes.length
-      ? (rebuildTimes.reduce((a, b) => a + b, 0) / rebuildTimes.length).toFixed(2)
+    const worstMs = deltaRing.length > 0
+      ? Math.max(...deltaRing.map(d => d.dt)).toFixed(1)
       : '—';
-    const max = rebuildTimes.length
-      ? Math.max(...rebuildTimes).toFixed(2)
-      : '—';
+    const slowCount = deltaRing.filter(d => d.dt > 33).length;
     debugEl.textContent =
       `FPS (rata-rata 2 s): ${fps}\n` +
-      `polygonsData rebuild: avg ${avg} ms / max ${max} ms (${rebuildTimes.length} sampel)\n` +
+      `frame terburuk (2 s): ${worstMs} ms\n` +
+      `frame >33 ms: ${slowCount}\n` +
       `crossfadeEnabled: ${crossfadeEnabled}`;
   }
 }
@@ -321,62 +324,52 @@ export async function setCrossfadeFrame(timeMa, isPlaying) {
   const isSingleZone = olderFrame.file === newerFrame.file;
   const doCrossfade  = crossfadeEnabled && isPlaying && !isSingleZone;
 
-  // ── Snap path ─────────────────────────────────────────────────────────────
-  if (!doCrossfade) {
-    const snapFrame = isSingleZone ? olderFrame : findNearestFrame(timeMa);
+  // ── Crossfade path ────────────────────────────────────────────────────────
+  if (doCrossfade) {
+    const olderReady = FRAME_CACHE.has(olderFrame.file);
+    const newerReady = FRAME_CACHE.has(newerFrame.file);
 
-    if (snapFrame.file !== displayedBottomFile) {
-      const alreadyReady = FRAME_CACHE.has(snapFrame.file);
-      if (!alreadyReady) setLoading(true);
-      try {
-        const geojson = await fetchFrame(snapFrame);
-        if (gen !== frameGen) return;
-        applyPolygons(globeBottom, geojson);
-        displayedBottomFile = snapFrame.file;
-      } catch (err) {
-        if (gen === frameGen) showError(err.message);
-      } finally {
-        if (!alreadyReady && gen === frameGen) setLoading(false);
+    if (olderReady && newerReady) {
+      if (olderFrame.file !== displayedBottomFile) {
+        applyPolygons(globeBottom, FRAME_CACHE.get(olderFrame.file));
+        displayedBottomFile = olderFrame.file;
       }
+      if (newerFrame.file !== displayedTopFile) {
+        applyPolygons(globeTop, FRAME_CACHE.get(newerFrame.file));
+        displayedTopFile = newerFrame.file;
+      }
+      if (topWrapper) {
+        topWrapper.style.opacity = String(frac);
+        if (frac > 0) globeTop.resumeAnimation();
+      }
+      return;
     }
 
-    if (topWrapper) topWrapper.style.opacity = '0';
-    if (globeTop)   globeTop.pauseAnimation();
-    return;
-  }
-
-  // ── Crossfade path ────────────────────────────────────────────────────────
-  // Both frames must be in cache to avoid an opacity/data race (stale geometry
-  // at non-zero opacity). The preloader keeps frames cached ahead of playback,
-  // so this guard fires only on the very first entry into a bracket.
-  const olderReady = FRAME_CACHE.has(olderFrame.file);
-  const newerReady = FRAME_CACHE.has(newerFrame.file);
-
-  if (!olderReady || !newerReady) {
-    // Kick off fetches and hold current display until cache fills
+    // Frames not ready: kick off fetches, then fall through to snap path
     if (!olderReady) fetchFrame(olderFrame).catch(() => {});
     if (!newerReady) fetchFrame(newerFrame).catch(() => {});
-    return;
   }
 
-  // Update bottom globe (older frame)
-  if (olderFrame.file !== displayedBottomFile) {
-    applyPolygons(globeBottom, FRAME_CACHE.get(olderFrame.file));
-    displayedBottomFile = olderFrame.file;
+  // ── Snap path ─────────────────────────────────────────────────────────────
+  const snapFrame = isSingleZone ? olderFrame : findNearestFrame(timeMa);
+
+  if (snapFrame.file !== displayedBottomFile) {
+    const alreadyReady = FRAME_CACHE.has(snapFrame.file);
+    if (!alreadyReady) setLoading(true);
+    try {
+      const geojson = await fetchFrame(snapFrame);
+      if (gen !== frameGen) return;
+      applyPolygons(globeBottom, geojson);
+      displayedBottomFile = snapFrame.file;
+    } catch (err) {
+      if (gen === frameGen) showError(err.message);
+    } finally {
+      if (!alreadyReady && gen === frameGen) setLoading(false);
+    }
   }
 
-  // Update top globe (newer frame)
-  if (newerFrame.file !== displayedTopFile) {
-    applyPolygons(globeTop, FRAME_CACHE.get(newerFrame.file));
-    displayedTopFile = newerFrame.file;
-  }
-
-  // Position-based opacity — frac in [0, 1]
-  if (topWrapper) {
-    topWrapper.style.opacity = String(frac);
-    // Ensure top globe is rendering whenever it's visible
-    if (frac > 0) globeTop.resumeAnimation();
-  }
+  if (topWrapper) topWrapper.style.opacity = '0';
+  if (globeTop)   globeTop.pauseAnimation();
 }
 
 /** Backward-compat wrapper used by main.js for initial frame load. */

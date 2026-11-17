@@ -1,6 +1,6 @@
 import { sliderToMa, maToSlider, formatMa, SEG, P } from './timescale.js';
 import { setCrossfadeFrame } from './globe.js';
-import { pausePlayback } from './playback.js';
+import { pausePlayback, isPlaybackActive } from './playback.js';
 
 const STEPS   = 10000;
 const SMALL   = 50;   // keyboard small step (~7 Ma in segment B)
@@ -92,10 +92,9 @@ function scheduleFrame(ma, isPlaying = false) {
 async function dispatchFrame() {
   rafHandle = null;
   const ma        = pendingMa;
-  const isPlaying = pendingIsPlaying;
+  const isPlaying = pendingIsPlaying && isPlaybackActive();
   pendingMa        = null;
   pendingIsPlaying = false;
-  // Pass raw ma to setCrossfadeFrame; it handles clamping for Seg A/C internally.
   await setCrossfadeFrame(ma, isPlaying);
 }
 

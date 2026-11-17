@@ -60,6 +60,9 @@ function tick(ts) {
 
 // ── Public API ────────────────────────────────────────────────────────────────
 
+/** Returns true while the animation loop is running. */
+export function isPlaybackActive() { return playing; }
+
 /** Stop playback and snap globe to nearest frame. Safe to call when stopped. */
 export function pausePlayback() {
   if (!playing) return;
