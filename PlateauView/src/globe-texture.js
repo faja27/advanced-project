@@ -70,45 +70,69 @@ function lonLatToXY(lon, lat) {
 
 // ── Canvas drawing ─────────────────────────────────────────────────────────────
 
-function countRingsAntim(rings) {
-  let n = 0;
-  for (const ring of rings) {
-    for (let i = 1; i < ring.length; i++) {
-      if (Math.abs(ring[i][0] - ring[i - 1][0]) > 180) n++;
-    }
+// Unwrap ring longitudes to be continuous, detect polar encirclement, draw
+// with three x-offsets (-W, 0, +W) so antimeridian-crossing polygons tile correctly.
+// draw=false counts only (no ctx2d calls).
+function processRing(ring, stats, draw) {
+  // Unwrap: make each step < 180° by carrying forward ±360 adjustments
+  const pts = new Array(ring.length);
+  pts[0] = [ring[0][0], ring[0][1]];
+  let didUnwrap = false;
+  for (let i = 1; i < ring.length; i++) {
+    let lon = ring[i][0];
+    const diff = lon - pts[i - 1][0];
+    if (diff > 180)       { lon -= 360; didUnwrap = true; }
+    else if (diff < -180) { lon += 360; didUnwrap = true; }
+    pts[i] = [lon, ring[i][1]];
   }
-  return n;
+  if (didUnwrap) stats.unwrapped++;
+
+  // Polar ring: total unwrapped lon span ≈ ±360 means ring encircles a pole
+  const totalDelta = pts.length >= 2 ? pts[pts.length - 1][0] - pts[0][0] : 0;
+  const isPolar = Math.abs(totalDelta) > 300;
+  let poleLat = 0;
+  if (isPolar) {
+    let sumLat = 0;
+    for (const pt of pts) sumLat += pt[1];
+    poleLat = sumLat / pts.length > 0 ? 90 : -90;
+    stats.polar++;
+  }
+
+  if (!draw) return;
+
+  // Bounding box in equirectangular x-space (using unwrapped lons)
+  let minLon = Infinity, maxLon = -Infinity;
+  for (const pt of pts) {
+    if (pt[0] < minLon) minLon = pt[0];
+    if (pt[0] > maxLon) maxLon = pt[0];
+  }
+
+  for (const xOff of [-W, 0, W]) {
+    const bxMin = (minLon + 180) / 360 * W + xOff;
+    const bxMax = (maxLon + 180) / 360 * W + xOff;
+    if (bxMax < 0 || bxMin > W) continue;
+
+    ctx2d.moveTo((pts[0][0] + 180) / 360 * W + xOff, (90 - pts[0][1]) / 180 * H);
+    for (let i = 1; i < pts.length; i++) {
+      ctx2d.lineTo((pts[i][0] + 180) / 360 * W + xOff, (90 - pts[i][1]) / 180 * H);
+    }
+    if (isPolar) {
+      const yPole = (90 - poleLat) / 180 * H;
+      ctx2d.lineTo((pts[pts.length - 1][0] + 180) / 360 * W + xOff, yPole);
+      ctx2d.lineTo((pts[0][0] + 180) / 360 * W + xOff, yPole);
+    }
+    ctx2d.closePath();
+  }
 }
 
-function traceGeom(geom) {
-  let antim = 0;
-  if (!geom) return antim;
+function traceGeom(geom, stats, draw) {
+  if (!geom) return;
   if (geom.type === 'Polygon') {
-    antim += countRingsAntim(geom.coordinates);
-    for (const ring of geom.coordinates) {
-      const [x0, y0] = lonLatToXY(ring[0][0], ring[0][1]);
-      ctx2d.moveTo(x0, y0);
-      for (let i = 1; i < ring.length; i++) {
-        const [x, y] = lonLatToXY(ring[i][0], ring[i][1]);
-        ctx2d.lineTo(x, y);
-      }
-      ctx2d.closePath();
-    }
+    for (const ring of geom.coordinates) processRing(ring, stats, draw);
   } else if (geom.type === 'MultiPolygon') {
-    for (const poly of geom.coordinates) {
-      antim += countRingsAntim(poly);
-      for (const ring of poly) {
-        const [x0, y0] = lonLatToXY(ring[0][0], ring[0][1]);
-        ctx2d.moveTo(x0, y0);
-        for (let i = 1; i < ring.length; i++) {
-          const [x, y] = lonLatToXY(ring[i][0], ring[i][1]);
-          ctx2d.lineTo(x, y);
-        }
-        ctx2d.closePath();
-      }
-    }
+    for (const poly of geom.coordinates)
+      for (const ring of poly) processRing(ring, stats, draw);
   }
-  return antim;
 }
 
 function drawFrame(geojson, frameFile) {
@@ -117,12 +141,12 @@ function drawFrame(geojson, frameFile) {
   ctx2d.fillStyle = '#002d50';
   ctx2d.fillRect(0, 0, W, H);
 
-  let antimCount = 0;
+  const stats = { unwrapped: 0, polar: 0 };
   if (geojson) {
     ctx2d.fillStyle = '#c8a96e';
     ctx2d.beginPath();
     for (const feature of geojson.features) {
-      antimCount += traceGeom(feature.geometry);
+      traceGeom(feature.geometry, stats, true);
     }
     ctx2d.fill('evenodd');
   }
@@ -140,7 +164,7 @@ function drawFrame(geojson, frameFile) {
   console.log(
     `[texture] draw ${frameFile ?? 'init'}: ${dt.toFixed(2)} ms` +
     ` | avg=${drawAvg.toFixed(2)} max=${drawMax.toFixed(2)}` +
-    ` | antimeridian segments: ${antimCount}`
+    ` | unwrapped=${stats.unwrapped} polar=${stats.polar}`
   );
 
   texMap.needsUpdate = true;
@@ -316,6 +340,27 @@ export async function setCrossfadeFrame(timeMa, _isPlaying) {
 
 export async function setFrame(timeMa) {
   await setCrossfadeFrame(timeMa, false);
+}
+
+// ── scanFrames ────────────────────────────────────────────────────────────────
+// Dry-run up to 126 frames (count-only, no drawing) and log ring stats.
+
+export async function scanFrames() {
+  if (!manifestData) { console.warn('[texture] scanFrames: manifest not loaded'); return null; }
+  const totalFrames = Math.min(manifestData.frames.length, 126);
+  let sumUnwrapped = 0, sumPolar = 0;
+  for (let i = 0; i < totalFrames; i++) {
+    const frame = manifestData.frames[i];
+    let geojson;
+    try { geojson = await fetchFrame(frame); } catch { continue; }
+    if (!geojson) continue;
+    const stats = { unwrapped: 0, polar: 0 };
+    for (const feature of geojson.features) traceGeom(feature.geometry, stats, false);
+    sumUnwrapped += stats.unwrapped;
+    sumPolar += stats.polar;
+  }
+  console.log(`[texture] scanFrames (${totalFrames} frames): unwrapped=${sumUnwrapped} polar=${sumPolar}`);
+  return { frames: totalFrames, unwrapped: sumUnwrapped, polar: sumPolar };
 }
 
 // ── initGlobe ─────────────────────────────────────────────────────────────────
