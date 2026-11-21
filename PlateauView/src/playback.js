@@ -194,3 +194,13 @@ export function initPlayback() {
     }
   });
 }
+
+/** Start playback programmatically (e.g. from bench mode). */
+export function startPlay() { play(); }
+
+/** Set playback speed and sync the UI speed buttons. */
+export function setSpeed(v) {
+  speed = v;
+  document.querySelectorAll('#pb-speeds .pb-speed').forEach(b =>
+    b.classList.toggle('pb-speed-active', +b.dataset.speed === v));
+}

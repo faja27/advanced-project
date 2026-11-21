@@ -44,6 +44,12 @@ let playStartTs  = null;
 let fallbackDone = false;
 let fallbackRing = [];
 
+// Bench mode: disables auto-fallback so crossfade runs honestly during bench
+let benchMode = false;
+export function setBenchMode(v) { benchMode = v; }
+export function getLongTaskSnapshot() { return [...longTaskLog]; }
+export function getCres() { return CRES; }
+
 // Long-task tracking via PerformanceObserver (rolling 5-second window)
 const longTaskLog = []; // { ts: DOMHighResTimeStamp, duration: number }
 if (typeof PerformanceObserver !== 'undefined' && PerformanceObserver.supportedEntryTypes?.includes('longtask')) {
@@ -258,7 +264,7 @@ function cameraSyncLoop(ts) {
   prevCameraTs = ts;
 
   // ── Auto-fallback: measure rAF timestamps between 1 s and 4 s after play ──
-  if (crossfadeEnabled && !fallbackDone && playStartTs !== null) {
+  if (crossfadeEnabled && !fallbackDone && !benchMode && playStartTs !== null) {
     const elapsed = ts - playStartTs;
     if (elapsed >= 1000 && elapsed < 4000) {
       fallbackRing.push(ts);
