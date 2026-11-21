@@ -13,6 +13,10 @@ let topWrapper  = null;   // div wrapper for globeTop; opacity knob
 // ── Crossfade flag (?crossfade=0 disables from load) ─────────────────────────
 export let crossfadeEnabled = new URLSearchParams(location.search).get('crossfade') !== '0';
 
+// ── Cap curvature resolution (?cres=N, default = globe.gl's built-in 5) ──────
+const _cresParsed = Number(new URLSearchParams(location.search).get('cres'));
+const CRES = Number.isFinite(_cresParsed) && _cresParsed > 0 ? _cresParsed : null;
+
 // ── Manifest & frame state ────────────────────────────────────────────────────
 let manifestData        = null;
 let frameGen            = 0;
@@ -39,6 +43,17 @@ let prevCameraTs = null;
 let playStartTs  = null;
 let fallbackDone = false;
 let fallbackRing = [];
+
+// Long-task tracking via PerformanceObserver (rolling 5-second window)
+const longTaskLog = []; // { ts: DOMHighResTimeStamp, duration: number }
+if (typeof PerformanceObserver !== 'undefined' && PerformanceObserver.supportedEntryTypes?.includes('longtask')) {
+  new PerformanceObserver(list => {
+    const now = performance.now();
+    for (const entry of list.getEntries()) {
+      longTaskLog.push({ ts: now, duration: entry.duration });
+    }
+  }).observe({ type: 'longtask', buffered: true });
+}
 
 // Camera sync rAF handle
 let cameraRafId = null;
@@ -284,11 +299,20 @@ function cameraSyncLoop(ts) {
       ? Math.max(...deltaRing.map(d => d.dt)).toFixed(1)
       : '—';
     const slowCount = deltaRing.filter(d => d.dt > 33).length;
+
+    // Prune long-task log to rolling 5-second window
+    const ltCutoff = ts - 5000;
+    while (longTaskLog.length > 0 && longTaskLog[0].ts < ltCutoff) longTaskLog.shift();
+    const ltCount   = longTaskLog.length;
+    const ltWorstMs = ltCount > 0 ? Math.max(...longTaskLog.map(e => e.duration)).toFixed(1) : '—';
+
     debugEl.textContent =
       `FPS (rata-rata 2 s): ${fps}\n` +
       `frame terburuk (2 s): ${worstMs} ms\n` +
       `frame >33 ms: ${slowCount}\n` +
-      `crossfadeEnabled: ${crossfadeEnabled}`;
+      `crossfadeEnabled: ${crossfadeEnabled}\n` +
+      `cres: ${CRES ?? '(default 5)'}\n` +
+      `long task (5 s): ${ltCount} | worst ${ltWorstMs} ms`;
   }
 }
 
@@ -413,10 +437,11 @@ export async function initGlobe(containerId) {
     .atmosphereAltitude(0.12)
     .polygonGeoJsonGeometry(d => d.geometry)
     .polygonCapColor(() => '#c8a96e')
-    .polygonSideColor(() => 'rgba(0,0,0,0)')
+    .polygonSideColor(() => null)
     .polygonStrokeColor(() => null)
     .polygonAltitude(0.004)
     .polygonsTransitionDuration(0);
+  if (CRES !== null) globeBottom.polygonCapCurvatureResolution(CRES);
 
   applyGlobeMaterial(globeBottom);
 
@@ -449,10 +474,11 @@ export async function initGlobe(containerId) {
     .showAtmosphere(false)
     .polygonGeoJsonGeometry(d => d.geometry)
     .polygonCapColor(() => '#c8a96e')
-    .polygonSideColor(() => 'rgba(0,0,0,0)')
+    .polygonSideColor(() => null)
     .polygonStrokeColor(() => null)
     .polygonAltitude(0.004)
     .polygonsTransitionDuration(0);
+  if (CRES !== null) globeTop.polygonCapCurvatureResolution(CRES);
 
   applyGlobeMaterial(globeTop);
 
