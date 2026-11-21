@@ -2,6 +2,8 @@ import { maToSlider } from './timescale.js';
 import { crossfadeEnabled, getCres, getLongTaskSnapshot, setBenchMode } from './globe.js';
 import { setSpeed, startPlay, pausePlayback } from './playback.js';
 
+const MODE_TEXTURE = new URLSearchParams(location.search).get('mode') === 'texture';
+
 const BENCH  = new URLSearchParams(location.search).get('bench') === '1';
 const STEPS  = 10000; // must match playback.js / timeline.js
 const WARMUP = 10_000; // ms to wait for preload before starting
@@ -92,6 +94,13 @@ function showResults(panel, rafDeltas, benchStart, benchT) {
   const worstMs    = count > 0 ? Math.max(...rafDeltas).toFixed(1) : '—';
   const slowCount  = rafDeltas.filter(d => d > 33).length;
 
+  // In texture mode, draw timing is tracked in globe-texture.js and exposed via window.__plateauTex
+  const texStats    = MODE_TEXTURE ? (window.__plateauTex ?? null) : null;
+  const drawAvgStr  = texStats ? `${texStats.avg.toFixed(2)} ms` : '—';
+  const drawMaxStr  = texStats ? `${texStats.max.toFixed(2)} ms` : '—';
+  const cfDisplay   = MODE_TEXTURE ? 'false (texture mode)' : String(crossfadeEnabled);
+  const cresDisplay = MODE_TEXTURE ? 'N/A (texture mode)'  : (getCres() ?? '(default 5)');
+
   panel.style.color = '#7fff7f';
   panel.textContent =
     `BENCH SELESAI\n` +
@@ -99,7 +108,9 @@ function showResults(panel, rafDeltas, benchStart, benchT) {
     `frame terburuk   : ${worstMs} ms\n` +
     `frame >33 ms     : ${slowCount} dari ${count}\n` +
     `long task        : ${ltCount}, terpanjang ${ltWorstMs} ms\n` +
-    `crossfadeEnabled : ${crossfadeEnabled}\n` +
-    `cres             : ${getCres() ?? '(default 5)'}\n` +
+    (texStats ? `draw avg         : ${drawAvgStr}\n` +
+                `draw max         : ${drawMaxStr}\n` : '') +
+    `crossfadeEnabled : ${cfDisplay}\n` +
+    `cres             : ${cresDisplay}\n` +
     `t awal           : ${benchT} Ma`;
 }
