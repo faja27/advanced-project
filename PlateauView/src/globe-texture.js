@@ -386,8 +386,13 @@ export async function initGlobe(containerId) {
   await new Promise(resolve => setTimeout(resolve, 0));
 
   // THREE.CanvasTexture: flipY=true (default) is correct for our north-at-top canvas
-  texMap            = new THREE.CanvasTexture(canvas2d);
-  texMap.colorSpace = THREE.SRGBColorSpace; // three r152+; canvas data is sRGB
+  texMap                = new THREE.CanvasTexture(canvas2d);
+  texMap.colorSpace     = THREE.SRGBColorSpace; // three r152+; canvas data is sRGB
+  texMap.generateMipmaps = true;
+  texMap.minFilter      = THREE.LinearMipmapLinearFilter;
+  texMap.magFilter      = THREE.LinearFilter;
+  texMap.anisotropy     = globeInst.renderer().capabilities.getMaxAnisotropy();
+  texMap.needsUpdate    = true;
 
   const mat = globeInst.globeMaterial();
   mat.map   = texMap;
